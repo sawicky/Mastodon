@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
+
 // Get Homepage if user is logged on, otherwise direct them to /users/login
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index');
+	res.render('index', {
+		tab: 'Book appointments',
+		content: 'Welcome',
+		loggedIn: true
+	});
 });
 
 function ensureAuthenticated(req, res, next){

@@ -41,7 +41,13 @@
 
         <!-- Main Section -->
         <section class="col-lg-8">
-            <h1> Book appointments </h1>
+            <h1> {{tab}} </h1>
+            {{#if loggedIn}}
+                <h3> {{content}} </h3>
+            {{else}}
+                <h3> Login in please </h3>
+            {{/if}}
+
         </section>
     </div>
 </main>
