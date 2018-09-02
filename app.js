@@ -20,6 +20,7 @@ var db = mongoose.connection;
 // Store the routes for each page
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var editDetails = require('./routes/editDetails');
 // store routes here
 
 
@@ -94,6 +95,7 @@ app.use(function (req, res, next) {
 //when a url path is requested, call the router for that page
 app.use('/', routes);
 app.use('/users', users);
+app.use('/editDetails', editDetails);
 //add path to a route here
 
 
