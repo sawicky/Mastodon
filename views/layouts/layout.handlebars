@@ -3,39 +3,60 @@
 
 <head>
   <title>MASTODON</title>
-  <link rel="stylesheet" href="/css/bootstrap.css" />
-  <link rel="stylesheet" href="/css/style.css" />
-
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
 
-  <div class="container-fluid containerPadding">
-    <div class="header clearfix">
-      <nav>
-        <ul class="nav nav-pills pull-right">
-          {{#if user}}
-          <li role="presentation">
-            <a href="/">Dashboard</a>
-          </li>
+<!-- Header -->
+    <header>
+        <a href="/"> <img src="../images/uts-logo.png" alt="UTS logo" class="logo"> </a>
+        <ul class="nav nav-pills pull-right topNav">
+            {{#if user }}
+                <li role="presentation">
+                    <a href="/">Dashboard</a>
+                </li>
 
-          <li role="presentation">
-            <a href="/users/logout">Logout</a>
-          </li>
-          {{else}}
-          <li role="presentation">
-            <a href="/users/login">Login</a>
-          </li>
-          <li role="presentation">
-            <a href="/users/register">Register</a>
-          </li>
-          {{/if}}
+                <li role="presentation">
+                    <a href="/users/logout">Logout</a>
+                </li>
+            {{else}}
+                <li role="presentation">
+                    <a href="/users/login">Login</a>
+                </li>
+                <li role="presentation">
+                    <a href="/users/register">Register</a>
+                </li>
+            {{/if}}
         </ul>
-      </nav>
-      <h3 class="text-muted">UTS Medical Appointment System</h3>
-    </div>
+    </header>
 
+    <!-- Navigation -->
+    <nav>
+        <ul class="nav justify-content-center topNav">
 
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Future students</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Current students</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Research and teaching</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Partners and community</a>
+            </li>
+
+        </ul>
+    </nav>
+
+  <div class="container-fluid containerPadding">
     <div class="row">
       <div class="col-lg-12">
         {{#if success_msg}}
@@ -44,18 +65,27 @@
         <div class="alert alert-danger">{{error_msg}}</div>
         {{/if}} {{#if error}}
         <div class="alert alert-danger">{{error}}</div>
-        {{/if}} {{{body}}}
+        {{/if}}
+
+          {{{body}}}
+
       </div>
-
-
     </div>
+  </div>
 
-    <footer class="footer">
-      <p>&copy; 2018 MASTODON, Inc.</p>
+
+    <!-- Footer -->
+    <footer>
+      <ul class="nav justify-content-center">
+          <a href="">About UTS</a>
+          <a href="">Library</a>
+          <a href="">Newsroom</a>
+          <a href="">Staff</a>
+          <a href="">Contact us</a>
+      </ul>
+        <p class="copyright">&copy; 2018 MASTODON, Inc.</p>
     </footer>
 
-  </div>
-  <!-- /container -->
 </body>
 
 </html>

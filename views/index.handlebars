@@ -15,7 +15,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/test">View status</a>
+                        <a class="nav-link" href="#">View status</a>
                     </li>
 
                     <li class="nav-item">
@@ -31,7 +31,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Log out</a>
+                        <a class="nav-link" href="/users/logout">Log out</a>
                     </li>
 
                 </ul>
@@ -40,13 +40,9 @@
 
         <!-- Main Section -->
         <section class="col-lg-8">
-            <h1> {{tab}} </h1>
-            {{#if loggedIn}}
-            <h3> {{content}} </h3>
-            {{else}}
-            <h3> Login in please </h3>
+            {{#if user}}
+                <h1> Hi, {{user.name}}! </h1>
             {{/if}}
-
         </section>
     </div>
 </main>
