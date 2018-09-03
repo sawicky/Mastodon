@@ -8,11 +8,11 @@
                 <ul class="nav flex-column list-features">
 
                     <li class="nav-item">
-                        <a class="nav-link on-page" href="#">Book appointments</a>
+                        <a class="nav-link" href="/">Book appointments</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/test">View status</a>
+                        <a class="nav-link" href="#">View status</a>
                     </li>
 
                     <li class="nav-item">
@@ -20,7 +20,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/editDetails">Edit personal details</a>
+                        <a class="nav-link on-page" href="/editDetails">Edit personal details</a>
                     </li>
 
                     <li class="nav-item">
@@ -39,28 +39,28 @@
 <!-- Main Section -->
         <section class="col-lg-8">
 
-<h2 class="page-header"><p align="left">Edit personal Details</p></h2>
-{{#if userExsists}}
-<div class="alert alert-danger"><p align="left">Username has taken already try new</p></div>
-{{/if}} {{#if mail}}
-<div class="alert alert-danger"><p align="left">Email has taken already try new</p></div>
-{{/if}} {{#if errors}} {{#each errors}}
-<div class="alert alert-danger">{{msg}}</div>
-{{/each}}{{/if}}
-<form method="post" action="/editDetails">
-    <div class="form-group">
-       <p align="left"><label>Name</p></label>
-        <input type="text" class="form-control" placeholder="Name" name="name" value={{loggedinUser.name}}>
-        </div>
+    <h2 class="page-header"><p align="left">Edit personal Details</p></h2>
+    {{#if userExsists}}
+    <div class="alert alert-danger"><p align="left">Username has taken already try new</p></div>
+    {{/if}} {{#if mail}}
+    <div class="alert alert-danger"><p align="left">Email has taken already try new</p></div>
+    {{/if}} {{#if errors}} {{#each errors}}
+    <div class="alert alert-danger">{{msg}}</div>
+    {{/each}}{{/if}}
+    <form method="post" action="/editDetails">
         <div class="form-group">
-           <p align="left"><label>Username</p></label>
-            <input type="text" class="form-control" placeholder="Username" name="username" value={{loggedinUser.username}}>
-        </div>
-        <div class="form-group">
-            <p align="left"><label>Email</p></label>
-            <input type="email" class="form-control" placeholder="Email" name="email" value={{loggedinUser.email}}>
-        </div>
+           <p align="left"><label>Name</p></label>
+            <input type="text" class="form-control" placeholder="Name" name="name" value={{loggedinUser.name}}>
+            </div>
+            <div class="form-group">
+               <p align="left"><label>Username</p></label>
+                <input type="text" class="form-control" placeholder="Username" name="username" value={{loggedinUser.username}}>
+            </div>
+            <div class="form-group">
+                <p align="left"><label>Email</p></label>
+                <input type="email" class="form-control" placeholder="Email" name="email" value={{loggedinUser.email}}>
+            </div>
 
-        <p align="left"><button type="submit" class="btn btn-default">Submit</button></p>
-</form>
- 
+            <p align="left"><button type="submit" class="btn btn-default">Submit</button></p>
+    </form>
+        </section>
