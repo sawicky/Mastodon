@@ -126,7 +126,7 @@ router.post(
     failureFlash: true
   }),
   function(req, res) {
-    res.redirect("/");
+    res.redirect("/dashboard");
   }
 );
 

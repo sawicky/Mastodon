@@ -20,6 +20,8 @@ var routes = require("./routes/index");
 var users = require("./routes/users");
 var editDetails = require("./routes/editDetails");
 var changePassword = require("./routes/changePassword");
+var viewDoctors = require("./routes/viewDoctors");
+var contactus = require("./routes/contactus");
 // store routes here
 
 // Init App
@@ -87,9 +89,12 @@ app.use(function(req, res, next) {
 
 //when a url path is requested, call the router for that page
 app.use("/", routes);
+app.use("/dashboard", routes);
 app.use("/users", users);
 app.use("/editDetails", editDetails);
 app.use("/changePassword", changePassword);
+app.use("/viewDoctors", viewDoctors);
+app.use("/contactus", contactus);
 //add path to a route here
 
 // Set Port

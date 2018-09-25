@@ -11,11 +11,11 @@
                 <ul class="nav flex-column list-features">
 
                     <li class="nav-item">
-                        <a class="nav-link on-page" href="#">Book appointments</a>
+                        <a class="nav-link" href="#">Book appointments</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/viewDoctors">View Doctors</a>
+                        <a class="nav-link on-page" href="/viewDoctors">View Doctors</a>
                     </li>
 
                     <li class="nav-item">
@@ -45,8 +45,11 @@
         <!-- Main Section -->
         <section class="col-lg-8">
             {{#if user}}
-                <h1> Hi, {{user.name}}! </h1>
+                <h1>Doctors</h1>
+            <h2>1. Dr. Jalal Qumar </h2>
+               <!-- <h1> get.Alldoctors</h1> put the code to grab all the doctors from database when the doctor's optiojn is done (GARY)-->
             {{/if}}
+
         </section>
     </div>
 </main>
