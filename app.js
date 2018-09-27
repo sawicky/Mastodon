@@ -32,9 +32,25 @@ var app = express();
 //No need to worry about all this, but must add path to a route below
 
 // View Engine
-app.set("views", path.join(__dirname, "views"));
-app.engine("handlebars", exphbs({ defaultLayout: "layout" }));
+app.engine("handlebars", exphbs({ defaultLayout: "layout",
+helpers:{
+  // Function to do basic mathematical operation in handlebar
+  math: function(lvalue, operator, rvalue) {lvalue = parseFloat(lvalue);
+      rvalue = parseFloat(rvalue);
+      return {
+          "+": lvalue + rvalue,
+          "-": lvalue - rvalue,
+          "*": lvalue * rvalue,
+          "/": lvalue / rvalue,
+          "%": lvalue % rvalue
+      }[operator];
+  }
+} }));
+
 app.set("view engine", "handlebars");
+app.set("views", path.join(__dirname, "views"));
+
+
 
 // BodyParser Middleware
 app.use(bodyParser.json());
