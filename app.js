@@ -10,10 +10,12 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var mongo = require("mongodb");
 var mongoose = require("mongoose");
+const MongoClient = require('mongodb').MongoClient;
 
 //connecting to mastodon db, make sure you have created this db locally
 mongoose.connect("mongodb://localhost/mastodon");
 var db = mongoose.connection;
+
 
 // Store the routes for each page
 var routes = require("./routes/index");

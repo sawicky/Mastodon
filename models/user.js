@@ -15,6 +15,9 @@ var UserSchema = mongoose.Schema({
   },
   name: {
     type: String
+  },
+  userType: {
+    type: String
   }
 });
 
