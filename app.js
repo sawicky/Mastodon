@@ -24,6 +24,7 @@ var editDetails = require("./routes/editDetails");
 var changePassword = require("./routes/changePassword");
 var viewDoctors = require("./routes/viewDoctors");
 var contactus = require("./routes/contactus");
+var profile = require("./routes/profile");
 // store routes here
 
 // Init App
@@ -101,8 +102,23 @@ app.use(function(req, res, next) {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
-  res.locals.user = req.user || null;
-  next();
+
+  user = req.user || null;
+  res.locals.user = user;
+
+  // This will check the type of the user and set a bool so that we can display the nav bar accordingly -sami
+  if(user) {
+      if (user.userType == "doctor") {
+          res.locals.isDoctor = true;
+
+      } else if (user.userType == "student") {
+          res.locals.isStudent = true;
+
+      } else if (user.userType == "admin") {
+          res.locals.isAdmin = true;
+      }
+  }
+      next();
 });
 
 //when a url path is requested, call the router for that page
@@ -113,6 +129,7 @@ app.use("/editDetails", editDetails);
 app.use("/changePassword", changePassword);
 app.use("/viewDoctors", viewDoctors);
 app.use("/contactus", contactus);
+app.use("/profile", profile);
 //add path to a route here
 
 // Set Port

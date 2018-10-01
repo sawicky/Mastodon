@@ -13,15 +13,16 @@
 <!-- Header -->
     <header>
         <a href="/"> <img src="../images/uts-logo.png" alt="UTS logo" class="logo"> </a>
-        <ul class="nav nav-pills pull-right topNav">
+        <ul class="nav nav-pills pull-right">
             {{#if user }}
-                <li role="presentation">
+                <li class="topNav marginbtn" role="presentation">
                     <a href="/">Dashboard</a>
                 </li>
 
                 <li role="presentation">
-                    <a href="/users/logout">Logout</a>
+                    <a href="/profile"> <img src="../images/userPic.png" class="profileImageDashboard"> </a>
                 </li>
+
             {{else}}
                 <li role="presentation">
                     <a href="/users/login">Login</a>
@@ -66,6 +67,129 @@
         {{/if}} {{#if error}}
         <div class="alert alert-danger">{{error}}</div>
         {{/if}}
+
+          <!-- Left side bar -->
+          {{#if user}}
+
+                {{#if isDoctor}}
+                    <aside class="col-lg-4 col-mg-12 col-sm-12">
+                        <div class="control-panel">
+                            <h4> DOCTOR CONTROL PANEL </h4>
+                            <hr class="line">
+
+                            <ul class="nav flex-column list-features">
+
+                                <li class="nav-item">
+                                    <a class="nav-link on-page" href="/viewAppointments"> View Appointments </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/myAvailability"> My Availability </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/uploadPrescriptions">Upload Prescriptions</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/editDetails">Edit personal details</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/changePassword">Change password</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users/logout">Log out</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </aside>
+
+                {{else if isStudent}}
+                    <aside class="col-lg-4 col-mg-12 col-sm-12">
+                        <div class="control-panel">
+                            <h4> STUDENT CONTROL PANEL </h4>
+                            <hr class="line">
+
+                            <ul class="nav flex-column list-features">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Book appointments</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/viewDoctors">View Doctors</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">View status</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Send enquiry</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/editDetails">Edit personal details</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/changePassword">Change password</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users/logout">Log out</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </aside>
+
+                {{else if isAdmin}}
+                    <aside class="col-lg-4 col-mg-12 col-sm-12">
+                        <div class="control-panel">
+                            <h4> ADMIN CONTROL PANEL </h4>
+                            <hr class="line">
+
+                            <ul class="nav flex-column list-features">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/viewDoctors">View Doctors</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">View Patients</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Manage</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/editDetails">Edit personal details</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/changePassword">Change password</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users/logout">Log out</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </aside>
+
+                {{else}}
+                    <div class="alert alert-danger">
+                        <span> There was an error trying to display the correct control panel, please login again. </span>
+                    </div>
+                {{/if}}
+
+          {{/if}}
 
           {{{body}}}
 

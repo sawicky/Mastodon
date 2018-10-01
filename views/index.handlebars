@@ -1,48 +1,6 @@
 <!-- Main -->
 <main class="container-fluid">
     <div class="row">
-
-        <!-- Left side bar -->
-        <aside class="col-lg-4 col-mg-12 col-sm-12">
-            <div class="control-panel">
-                <h4> STUDENT CONTROL PANEL </h4>
-                <hr class="line">
-
-                <ul class="nav flex-column list-features">
-
-                    <li class="nav-item">
-                        <a class="nav-link on-page" href="#">Book appointments</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/viewDoctors">View Doctors</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">View status</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Send enquiry</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/editDetails">Edit personal details</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/changePassword">Change password</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users/logout">Log out</a>
-                    </li>
-
-                </ul>
-            </div>
-        </aside>
-
-        <!-- Main Section -->
         <section class="col-lg-8">
             {{#if user}}
                 <h1> Hi, {{user.name}}! </h1>

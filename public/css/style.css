@@ -104,8 +104,45 @@ section{
   font-weight: bold;
 }
 
+.marginbtn{
+  margin-top: 15px;
+}
 
+.profileImageDashboard{
+  width: 50px;
+}
 
+a .profileImageDashboard:hover{
+  opacity: 0.7;
+  transition: 0.5s !important;
+  background-color: #fff !important;
+  transform: scale(1.2);
+}
+
+.profileImage{
+  width: 175px;
+}
+
+.profileName{
+  float: right;
+}
+
+.profile{
+  margin-left: 35%;
+  width: 350px;
+  margin-top: -25px;
+}
+
+.profile:hover{
+  transform:scale(1.1);
+  transition: 1.5s;
+  background: #eee;
+}
+
+.specialty{
+  font-style: italic;
+  font-weight: bold;
+}
 
 
 /* Style the footer */

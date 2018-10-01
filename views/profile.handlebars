@@ -1,0 +1,18 @@
+<main class="container-fluid">
+    <div class="row">
+        <section class="col-lg-8">
+
+            <div class="card profile">
+                <img class="card-img-top" src="../images/userPic.png" alt="Profile/Bio">
+                <div class="card-body">
+                    <h2 class="card-title">{{userReq.name}}</h2>
+                    {{#if doctor}}
+                        <p class="card-text">{{userReq.bio}}</p>
+                        <span class="card-text specialty">{{userReq.specialty}}</span>
+                    {{/if}}
+                </div>
+            </div>
+
+        </section>
+    </div>
+</main>

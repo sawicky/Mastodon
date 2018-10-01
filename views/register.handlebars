@@ -6,34 +6,76 @@
 {{/if}} {{#if errors}} {{#each errors}}
 <div class="alert alert-danger">{{msg}}</div>
 {{/each}} {{/if}}
+
 <form method="post" action="/users/register">
+
   <div class="form-group">
     <label>Name</label>
     <input type="text" class="form-control" placeholder="Name" name="name">
   </div>
+
   <div class="form-group">
     <label>Username</label>
     <input type="text" class="form-control" placeholder="Username" name="username">
   </div>
+
   <div class="form-group">
     <label>Email</label>
     <input type="email" class="form-control" placeholder="Email" name="email">
   </div>
+
   <div class="form-group">
     <label>Password</label>
     <input type="password" class="form-control" placeholder="Password" name="password">
   </div>
+
   <div class="form-group">
     <label>Confirm Password</label>
     <input type="password" class="form-control" placeholder="Password" name="password2">
   </div>
+
   <div class="form-group">
     <label>User Type</label>
-    <select name="type">
+    <select id="selected" onchange="DoctorSelected()" name="type">
       <option value="student">Student</option>
       <option value="admin">UTS Staff</option>
       <option value="doctor">Medical Staff</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+
+    <div id="bio" style="display: none;" class="form-group">
+        <label>Bio</label>
+        <textarea class="form-control" name="bio" placeholder="John is the Robert P. Kelch, MD Research Professor of Pediatrics at the ..." rows="5"></textarea>
+
+    </div>
+
+    <div id="specialty" style="display: none;" class="form-group">
+        <label>Specialty</label>
+        <input type="text" class="form-control" placeholder="Pathology" name="specialty">
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
 </form>
+
+
+
+
+
+<script>
+    /* This JS code will check if the doctor option was selected and will display extra info for the doctor to fill out. */
+    function DoctorSelected() {
+        var selected = document.getElementById("selected").value;
+
+        var bio = document.getElementById("bio");
+        var specialty = document.getElementById("specialty");
+
+        if(selected == "doctor") {
+            bio.style.display = "block";
+            specialty.style.display = "block";
+
+        } else {
+            bio.style.display = "none";
+            specialty.style.display = "none";
+        }
+    }
+</script>

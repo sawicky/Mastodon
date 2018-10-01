@@ -24,6 +24,8 @@ router.post("/register", function(req, res) {
   var password = req.body.password;
   var password2 = req.body.password2;
   var type = req.body.type;
+  var bio = req.body.bio;
+  var specialty = req.body.specialty;
 
   // Validation
   req.checkBody("name", "Name is required").notEmpty();
@@ -71,7 +73,9 @@ router.post("/register", function(req, res) {
                 email: email,
                 username: username,
                 password: password,
-                userType: type
+                userType: type,
+                bio: bio,
+                specialty: specialty
               });
               User.createUser(newUser, function(err, user) {
                 if (err) throw err;
