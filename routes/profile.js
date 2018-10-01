@@ -6,7 +6,16 @@ var User = require("../models/user");
 
 // Get Edit details page if user is logged on, otherwise direct them to /users/login
 router.get("/", ensureAuthenticated, function(req, res) {
-    res.render("profile", {userReq: user});
+    var doctor;
+    
+    if(req.user.userType == "doctor"){
+        doctor = true;
+    }
+
+    res.render("profile", {
+        userReq: user,
+        doctor: true
+    });
 });
 
 // ID Parameter URL
