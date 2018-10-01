@@ -9,7 +9,7 @@ router.get("/", ensureAuthenticated, function(req, res) {
     res.render("profile", {userReq: user});
 });
 
-// ID Parameter URL 
+// ID Parameter URL
 router.get("/:id", ensureAuthenticated, function(req, res) {
     var id = req.params.id;
     var doctor;
