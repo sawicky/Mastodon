@@ -5,13 +5,16 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/wdio wdio.conf.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "*",
     "body-parser": "*",
+    "casperjs": "^1.1.4",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
     "express": "*",
@@ -19,10 +22,15 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "mocha": "^5.2.0",
     "mongodb": "*",
     "mongoose": "*",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "webdriverio": "^4.13.2"
+  },
+  "devDependencies": {
+    "wdio-mocha-framework": "^0.6.3"
   }
 }
