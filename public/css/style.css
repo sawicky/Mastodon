@@ -144,6 +144,19 @@ a .profileImageDashboard:hover{
   font-weight: bold;
 }
 
+/* PRESCRIPTINO FORM */
+.prescriptionForm{
+  padding: 25px;
+}
+
+.custom-select{
+  width: 250px;
+  height: 35px;
+}
+
+.uploadbtn{
+  margin-left: 25px;
+}
 
 /* Style the footer */
 footer {
