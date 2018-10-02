@@ -1,8 +1,6 @@
 var express = require("express");
 var router = express.Router();
 
-var User = require("../models/user");
-
 // Get Edit details page if user is logged on, otherwise direct them to /users/login
 router.get("/", ensureAuthenticated, function(req, res) {
     res.render("contactus", { loggedinUser: req.user });

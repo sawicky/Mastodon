@@ -5,19 +5,24 @@ var User = require("../models/user");
 // Get Homepage if user is logged on, otherwise direct them to /users/login
 router.get('/', ensureAuthenticated, function(req, res){
 	var user = req.user;
+
 	switch (user.userType) {
+
 		case "student":
-		res.render('index',{user: user});
-		Console.console.log("User is a student, showing student index");
+		res.render('index');
+		console.log("User is a student, showing student index");
 		break;
+
 		case "admin":
-		res.render('indexAdmin', {user: user});
+		res.render('indexAdmin');
 		console.log("User is admin, showing admin index");
 		break;
+
 		case "doctor":
-		res.render("indexDoctor", {user:user});
+		res.render("indexDoctor");
 		console.log("User is doctor, showing doctor page");
 		break;
+
 		default:
 		res.render('index');
 		console.log("User was not any type - normal index page");
@@ -25,10 +30,11 @@ router.get('/', ensureAuthenticated, function(req, res){
 });
 
 
+
   //  res.render('profile', { title: 'profile', user: user });
 
 function getUserType(req, res, next) {
-	
+
 }
 
 function ensureAuthenticated(req, res, next){

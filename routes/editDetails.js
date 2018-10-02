@@ -5,13 +5,15 @@ var User = require("../models/user");
 
 // Get Edit details page if user is logged on, otherwise direct them to /users/login
 router.get("/", ensureAuthenticated, function(req, res) {
-  res.render("editDetails", { loggedinUser: req.user });
+  res.render("editDetails", { loggedinUser: req.user});
 });
 router.post("/", ensureAuthenticated, function(req, res) {
   var name = req.body.name;
   var email = req.body.email;
   var username = req.body.username;
   var password = req.body.password;
+  var bio = req.body.bio;
+  var specialty = req.body.specialty;
 
   req.checkBody("name", "Name is required").notEmpty();
   req.checkBody("email", "Email is required").notEmpty();
@@ -56,7 +58,9 @@ router.post("/", ensureAuthenticated, function(req, res) {
               name: name,
               email: email,
               username: username,
-              password: req.body.password
+              password: password,
+              bio: req.body.bio,
+              specialty: req.body.specialty
             });
             User.updateUser(updateUser, req.user._id, function(err, user) {
               if (err) throw err;

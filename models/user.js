@@ -19,6 +19,12 @@ var UserSchema = mongoose.Schema({
   },
   userType: {
     type: String
+  },
+  bio: {
+      type: String
+  },
+  specialty: {
+      type: String
   }
 });
 
