@@ -3,8 +3,8 @@ var router = express.Router();
 var User = require("../models/user");
 
 router.get("/", ensureAuthenticated, function(req, res) {
-    User.find({userType: "doctor"}, function (err, docs) {
-        res.render("viewDoctors", {doctors: docs});
+    User.find({userType: "student"}, function (err, patients) {
+        res.render("uploadprescriptions", {patient: patients});
     });
 });
 
