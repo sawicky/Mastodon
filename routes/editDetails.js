@@ -59,8 +59,8 @@ router.post("/", ensureAuthenticated, function(req, res) {
               email: email,
               username: username,
               password: password,
-              bio: req.body.bio,
-              specialty: req.body.specialty
+              bio: bio,
+              specialty: specialty
             });
             User.updateUser(updateUser, req.user._id, function(err, user) {
               if (err) throw err;

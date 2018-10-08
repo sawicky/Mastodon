@@ -25,8 +25,8 @@ var changePassword = require("./routes/changePassword");
 var viewDoctors = require("./routes/viewDoctors");
 var contactus = require("./routes/contactus");
 var profile = require("./routes/profile");
-var uploadprescriptions = require("./routes/uploadprescriptions");
-var test = require("./routes/test");
+var uploadPrescriptions = require("./routes/uploadPrescriptions");
+var viewPrescriptions = require("./routes/viewPrescriptions");
 // store routes here
 
 // Init App
@@ -132,8 +132,8 @@ app.use("/changePassword", changePassword);
 app.use("/viewDoctors", viewDoctors);
 app.use("/contactus", contactus);
 app.use("/profile", profile);
-app.use("/uploadprescriptions", uploadprescriptions);
-app.use("/test", test);
+app.use("/uploadPrescriptions", uploadPrescriptions);
+app.use("/viewPrescriptions", viewPrescriptions);
 //add path to a route here
 
 // Set Port

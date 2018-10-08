@@ -60,11 +60,16 @@
   <div class="container-fluid containerPadding">
     <div class="row">
       <div class="col-lg-12">
+
         {{#if success_msg}}
         <div class="alert alert-success">{{success_msg}}</div>
-        {{/if}} {{#if error_msg}}
+        {{/if}}
+
+          {{#if error_msg}}
         <div class="alert alert-danger">{{error_msg}}</div>
-        {{/if}} {{#if error}}
+        {{/if}}
+
+          {{#if error}}
         <div class="alert alert-danger">{{error}}</div>
         {{/if}}
 
@@ -87,7 +92,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/uploadprescriptions">Upload Prescriptions</a>
+                                    <a class="nav-link" href="/uploadPrescriptions">Upload Prescriptions</a>
                                 </li>
 
                                 <li class="nav-item">
@@ -124,6 +129,10 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">View status</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/viewPrescriptions">View Prescriptions</a>
                                 </li>
 
                                 <li class="nav-item">

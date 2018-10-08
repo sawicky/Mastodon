@@ -19,8 +19,8 @@ router.get("/:id", ensureAuthenticated, function(req, res) {
     User.getUserById(id, function(err, doctor) {
         console.log(doctor);
         res.render("profile", {
-                user: doctor,
-            });
+            user: doctor,
+        });
     });
 });
 
