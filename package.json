@@ -26,6 +26,7 @@
     "mongodb": "*",
     "mongoose": "*",
     "nodemailer": "^4.6.8",
+    "npm-merge-driver": "^2.3.5",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
