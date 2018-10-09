@@ -1,14 +1,17 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
+var Prescription = require("../models/prescription");
 
 router.get("/", ensureAuthenticated, function(req, res) {
-    var doctor = user.prescription.doctor;
-    var description = user.prescription.description;
 
-    res.render("viewPrescriptions", {
-        doctor: doctor,
-        description: description
+    // stores the studentID so we can then check in the prescription DB to see if that student has any prescriptions.
+    var studentid = user._id.toString();
+
+    // we pass in the studentID as a string and query the DB to find the prescriptions.
+    Prescription.find({studentid: studentid}, function (err, prescriptions) {
+        res.render("viewPrescriptions", {prescriptions: prescriptions});
+        console.log(prescriptions.doctor);
     });
 });
 

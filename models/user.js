@@ -25,10 +25,6 @@ var UserSchema = mongoose.Schema({
   },
   specialty: {
       type: String
-  },
-  prescription: {
-      doctor: String,
-      description: String
   }
 });
 
