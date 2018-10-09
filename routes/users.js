@@ -106,15 +106,18 @@ router.post("/register", function(req, res) {
                 if (err) throw err;
                 //  mail sending options GARY
                 console.log("email is", email);
+                var newLink = req.originalUrl + `/users/verify/${user.verificationCode}`;
+                console.log("verification link is", newLink);
                 let mailOptions = {
                   from: '"UTS University" <mastodonuts0@gmail.com>', // sender address
                   to: email, // list of receivers
                   subject: "Welcome to Mastadon", // Subject le
                   text: "Verification Link", // plain text body
                   // MAIL TEMPLATE
+                  
                   html: userVerification(
                     name,
-                    `${config.config.baseUrl}/users/verify/${
+                    `www.sawickers.com:3000/users/verify/${
                       user.verificationCode
                     }`,
                     user.email
