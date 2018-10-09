@@ -114,10 +114,10 @@ router.post("/register", function(req, res) {
                   subject: "Welcome to Mastadon", // Subject le
                   text: "Verification Link", // plain text body
                   // MAIL TEMPLATE
-                  
+
                   html: userVerification(
                     name,
-                    `www.sawickers.com:3000/users/verify/${
+                    `http://www.sawickers.com:3000/users/verify/${
                       user.verificationCode
                     }`,
                     user.email
