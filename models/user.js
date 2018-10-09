@@ -21,10 +21,16 @@ var UserSchema = mongoose.Schema({
     type: String
   },
   bio: {
-      type: String
+    type: String
   },
   specialty: {
-      type: String
+    type: String
+  },
+  // FOR VERIFICATION GARY
+  verificationStatus: { type: Boolean, default: false },
+  //FOR MAKING LINK ONE TIME USABLE GARY
+  verificationCode: {
+    type: String
   }
 });
 
@@ -32,7 +38,7 @@ var User = (module.exports = mongoose.model("User", UserSchema));
 
 module.exports.getUserType = function() {
   return {
-    userType:userType
+    userType: userType
   };
 };
 module.exports.createUser = function(newUser, callback) {
@@ -61,11 +67,20 @@ module.exports.getUserByEmailAndId = function(email, id, callback) {
   var query = { email: email, _id: { $ne: id } };
   User.findOne(query, callback);
 };
+
 module.exports.updateUser = function(updateUser, id, callback) {
   var query = null;
   var username = updateUser.username;
-  var email = updateUser.email,
-    query = { $set: { email, username, name: updateUser.name } };
+  var email = updateUser.email;
+  var name = updateUser.name;
+  var bio = updateUser.bio;
+  var specialty = updateUser.specialty;
+
+  query = { $set:
+          {
+              email, username, name, bio, specialty
+          }
+  };
   User.findOneAndUpdate({ _id: id }, query, { new: true }, callback);
 };
 
@@ -79,6 +94,12 @@ module.exports.updatePassword = function(id, password, callback) {
     });
   });
 };
+
+module.exports.addPrescription = function(id, doctor, description, callback) {
+    query = { $set: { doctor, description }};
+    User.findOneAndUpdate({ _id: id }, query, { new: true }, callback);
+};
+
 module.exports.comparePassword = function(candidatePassword, hash, callback) {
   bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
     if (err) throw err;

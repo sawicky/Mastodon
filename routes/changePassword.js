@@ -11,6 +11,13 @@ router.post("/", ensureAuthenticated, function(req, res) {
   var password2 = req.body.password2;
   req.checkBody("password", " Old Password is required").notEmpty();
   req.checkBody("newPassword", " New Password is required").notEmpty();
+  //VALIDATION ON PASSWORD GARY
+  req
+    .checkBody(
+      "password2",
+      "Password must include one lowercase character, one uppercase character, a number, and a special character"
+    )
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,}$/, "i");
   if (req.body.newPassword.length > 0) {
     req
       .checkBody("password2", "New Password and Confirm Passwords do not match")

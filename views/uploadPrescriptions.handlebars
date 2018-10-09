@@ -2,15 +2,6 @@
     <div class="row">
         <section class="col-lg-8">
 
-
-            <!--
-            <h3> Select a Patient from below to upload Prescription: </h3> <br>
-            <select class="custom-select" onchange="PatientSelected()" id="patients">
-                <option value=""> Please select an option</option>
-            </select>
-
-            -->
-
             <div class="container">
                 <h1>Search or select a patient</h1>
 
@@ -18,15 +9,19 @@
                     <optgroup label="Patients">
                         <option value="notSelected"> Nothing selected</option>
                         {{#each patient}}
-                            <option value="{{this.id}}" name={{this.id}}> {{this.name}} </option>
+                            <option value="{{this.id}}" name="accessID"> {{this.name}} </option>
                         {{/each}}
                     </optgroup>
                 </select>
 
-                <form method="post" action="/prescriptionUploadSuccess">
+                <form method="post" action="/uploadPrescriptions">
+
                     <div id="prescriptionForm" style="display: none;" class="form-group prescriptionForm">
+                        <input type="hidden" id="myField" name="studentID" value=""/>
+
                         <textarea class="form-control" name="prescription" placeholder="Write a description here..." rows="5"></textarea>
                     </div>
+
                     <button style="display: none;" id="button" type="submit" class="btn btn-default uploadbtn">Upload Prescription</button>
                 </form>
             </div>
@@ -50,6 +45,7 @@
         var prescriptionForm = document.getElementById("prescriptionForm");
 
         if (patient != null && PatientID != "notSelected") {
+            document.getElementById('myField').value = PatientID;
             prescriptionForm.style.display = "block";
             button.style.display = "block";
 
