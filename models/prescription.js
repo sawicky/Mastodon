@@ -4,8 +4,8 @@ var bcrypt = require("bcryptjs");
 // User Schema
 var PrescriptionSchema = mongoose.Schema({
 
-    // stores prescription for that student and can then by the student ID.
-    studentid: {
+    // stores prescription for that student and the doctor that created the prescription
+    student: {
         type: String
     },
     doctor: {

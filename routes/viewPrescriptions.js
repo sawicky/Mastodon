@@ -4,17 +4,40 @@ var User = require("../models/user");
 var Prescription = require("../models/prescription");
 
 router.get("/", ensureAuthenticated, function(req, res) {
+    var isPatient;
+    var username = user.username;
 
-    // stores the studentID so we can then check in the prescription DB to see if that student has any prescriptions.
-    var studentid = user._id.toString();
+    if(user.userType != "doctor") {
+        // stores the studentID so we can then check in the prescription DB to see if that student has any prescriptions.
+        patientViewPrescription(res, isPatient, username);
 
-    viewPrescriptions(res, studentid);
+    } else {
+        // Display the prescriptions added by a doctor
+        doctorsViewPrescription(res, isPatient, username);
+    }
 });
 
+
+function doctorsViewPrescription(res, isPatient, username){
+    isPatient = false;
+
+    Prescription.find({doctor: username}, function (err, prescriptions) {
+        res.render("viewPrescriptions", {
+            prescriptions: prescriptions,
+            isPatient: isPatient
+        });
+    });
+}
+
 // we pass in the studentID as a string and query the DB to find the prescriptions.
-function viewPrescriptions(res, studentid){
-    Prescription.find({studentid: studentid}, function (err, prescriptions) {
-        res.render("viewPrescriptions", {prescriptions: prescriptions});
+function patientViewPrescription(res, isPatient, username){
+    isPatient = true;
+
+    Prescription.find({student: username}, function (err, prescriptions) {
+        res.render("viewPrescriptions", {
+            prescriptions: prescriptions,
+            isPatient: isPatient
+        });
     });
 }
 

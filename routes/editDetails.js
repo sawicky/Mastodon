@@ -65,8 +65,6 @@ router.post("/", ensureAuthenticated, function(req, res) {
             User.updateUser(updateUser, req.user._id, function(err, user) {
               if (err) {
                   throw err;
-              } else {
-                  req.flash("success_msg", "You are updated");
               }
 
               if (req.user.email !== user.email || req.user.username !== user.username) {
@@ -74,6 +72,7 @@ router.post("/", ensureAuthenticated, function(req, res) {
                 res.redirect("/users/login");
                 return;
               }
+              req.flash("success_msg", "You are updated");
               res.render("editDetails", {
                 loggedinUser: user
               });

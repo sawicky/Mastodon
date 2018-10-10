@@ -9,7 +9,7 @@
                     <optgroup label="Patients">
                         <option value="notSelected"> Nothing selected</option>
                         {{#each patient}}
-                            <option value="{{this.id}}" name="accessID"> {{this.name}} </option>
+                            <option value="{{this.username}}" name="accessID"> {{this.username}} </option>
                         {{/each}}
                     </optgroup>
                 </select>
@@ -17,35 +17,36 @@
                 <form method="post" action="/uploadPrescriptions">
 
                     <div id="prescriptionForm" style="display: none;" class="form-group prescriptionForm">
-                        <input type="hidden" id="myField" name="studentID" value=""/>
+                        <input type="hidden" id="myField" name="username" value=""/>
 
                         <textarea class="form-control" name="prescription" placeholder="Write a description here..." rows="5"></textarea>
                     </div>
 
                     <button style="display: none;" id="button" type="submit" class="btn btn-default uploadbtn">Upload Prescription</button>
                 </form>
+
+
+
             </div>
         </section>
     </div>
 </main>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+
+
+
 
 <script>
     function PatientSelected(){
         var patient = document.getElementById("patients");
         var button  = document.getElementById("button");
-        var PatientID = patient.options[patient.selectedIndex].value;
-        console.log(PatientID);
+        var username = patient.options[patient.selectedIndex].value;
+        console.log(username);
 
         var prescriptionForm = document.getElementById("prescriptionForm");
 
-        if (patient != null && PatientID != "notSelected") {
-            document.getElementById('myField').value = PatientID;
+        if (patient != null && username != "notSelected") {
+            document.getElementById('myField').value = username;
             prescriptionForm.style.display = "block";
             button.style.display = "block";
 

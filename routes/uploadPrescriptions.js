@@ -14,33 +14,38 @@ router.get("/", ensureAuthenticated, function(req, res) {
 
 router.post("/", ensureAuthenticated, function(req, res){
 
-    // store the studentID
-    var id = req.body.studentID.toString();
-
+    // store the student username
+    var student = req.body.username;
+    console.log(student);
     // store the doctor username
     var doctor = user.username;
 
     // store the prescription
     var description = req.body.prescription;
 
-    createPrescriptionForStudent(req, res, id, doctor, description);
+    createPrescriptionForStudent(req, res, student, doctor, description);
 
 });
 
 // DB query to find the object based on the student ID
-function createPrescriptionForStudent(req, res, id , doctor, description){
+function createPrescriptionForStudent(req, res, student , doctor, description){
 
-    User.getUserById(id, function(err, student) {
-        console.log("Doctor: " + doctor + "\nDescription: " + description);
+    User.getUserByUsername(student, function(err, studentFound) {
+        if(err)
+            req.flash("error_msg", "Couldn't find patient");
 
-        // create a new prescription object
-        var newPrescription = new Prescription({
-            studentid: id,
-            doctor: doctor,
-            description: description
-        });
+        else {
+            console.log("Doctor: " + doctor + "\nDescription: " + description + " for " + student);
 
-        addPrescriptionToDB(req, res, newPrescription);
+            // create a new prescription object
+            var newPrescription = new Prescription({
+                student: student,
+                doctor: doctor,
+                description: description
+            });
+
+            addPrescriptionToDB(req, res, newPrescription);
+        }
     });
 }
 
@@ -53,7 +58,7 @@ function addPrescriptionToDB(req, res, newPrescription){
             req.flash("success_msg", "Upload Success!");
             console.log(prescription);
         }
-        res.redirect("/uploadPrescriptions");
+        res.redirect("/viewPrescriptions");
     });
 }
 
