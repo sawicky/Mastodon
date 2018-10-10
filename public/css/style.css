@@ -118,6 +118,10 @@ section{
   width: 50px;
 }
 
+.form-readonly{
+    background-color: #fff !important;
+}
+
 a .profileImageDashboard:hover{
   opacity: 0.7;
   transition: 0.5s !important;
