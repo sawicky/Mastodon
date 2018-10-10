@@ -8,12 +8,15 @@ router.get("/", ensureAuthenticated, function(req, res) {
     // stores the studentID so we can then check in the prescription DB to see if that student has any prescriptions.
     var studentid = user._id.toString();
 
-    // we pass in the studentID as a string and query the DB to find the prescriptions.
+    viewPrescriptions(res, studentid);
+});
+
+// we pass in the studentID as a string and query the DB to find the prescriptions.
+function viewPrescriptions(res, studentid){
     Prescription.find({studentid: studentid}, function (err, prescriptions) {
         res.render("viewPrescriptions", {prescriptions: prescriptions});
-        console.log(prescriptions.doctor);
     });
-});
+}
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {

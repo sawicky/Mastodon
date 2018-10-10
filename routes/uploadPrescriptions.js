@@ -23,9 +23,14 @@ router.post("/", ensureAuthenticated, function(req, res){
     // store the prescription
     var description = req.body.prescription;
 
-    // DB query to find the object based on the student ID
-    User.getUserById(id, function(err, student) {
+    createPrescriptionForStudent(req, res, id, doctor, description);
 
+});
+
+// DB query to find the object based on the student ID
+function createPrescriptionForStudent(req, res, id , doctor, description){
+
+    User.getUserById(id, function(err, student) {
         console.log("Doctor: " + doctor + "\nDescription: " + description);
 
         // create a new prescription object
@@ -35,18 +40,22 @@ router.post("/", ensureAuthenticated, function(req, res){
             description: description
         });
 
-        // add the prescription to the database
-        Prescription.AddPrescription(newPrescription, function(err, prescription){
-           if(err)
-               req.flash("error_msgg", "Upload failed, please try again.");
-           else {
-               req.flash("success_msg", "Upload Success!");
-               console.log(prescription);
-           }
-            res.redirect("/uploadPrescriptions");
-        });
+        addPrescriptionToDB(req, res, newPrescription);
     });
-});
+}
+
+// add the prescription to the database
+function addPrescriptionToDB(req, res, newPrescription){
+    Prescription.AddPrescription(newPrescription, function(err, prescription){
+        if(err)
+            req.flash("error_msg", "Upload failed, please try again.");
+        else {
+            req.flash("success_msg", "Upload Success!");
+            console.log(prescription);
+        }
+        res.redirect("/uploadPrescriptions");
+    });
+}
 
 
 

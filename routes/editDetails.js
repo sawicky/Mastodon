@@ -63,18 +63,17 @@ router.post("/", ensureAuthenticated, function(req, res) {
               specialty: specialty
             });
             User.updateUser(updateUser, req.user._id, function(err, user) {
-              if (err) throw err;
+              if (err) {
+                  throw err;
+              } else {
+                  req.flash("success_msg", "You are updated");
+              }
 
-              req.flash("success_msg", "You are updated");
-              if (
-                req.user.email !== user.email ||
-                req.user.username !== user.username
-              ) {
+              if (req.user.email !== user.email || req.user.username !== user.username) {
                 req.logOut();
                 res.redirect("/users/login");
                 return;
               }
-
               res.render("editDetails", {
                 loggedinUser: user
               });

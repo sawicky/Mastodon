@@ -30,13 +30,6 @@ router.get('/', ensureAuthenticated, function(req, res){
 });
 
 
-
-  //  res.render('profile', { title: 'profile', user: user });
-
-function getUserType(req, res, next) {
-
-}
-
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
