@@ -154,14 +154,37 @@ a .profileImageDashboard:hover{
   font-weight: bold;
 }
 
-/* PRESCRIPTINO FORM */
-.prescriptionForm{
+.custom-form{
   padding: 25px;
 }
 
 .custom-select{
   width: 250px;
   height: 35px;
+}
+
+.addavaiablity{
+    width: 300px;
+    margin-top: 15px;
+}
+
+.avaiablitybtns{
+    background: #f5f5f5 !important;
+    width:250px;
+    height:250px;
+    margin-top: 50px;
+    font-size: 23px !important;
+    font-weight: bold !important;
+}
+
+.avaiablitybtns:hover{
+    transition: .4s !important;
+}
+
+.datetime{
+    font-weight: normal;
+    font-style: italic;
+    padding: 10px;
 }
 
 .uploadbtn{

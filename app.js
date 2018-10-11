@@ -27,6 +27,8 @@ var contactus = require("./routes/contactus");
 var profile = require("./routes/profile");
 var uploadPrescriptions = require("./routes/uploadPrescriptions");
 var viewPrescriptions = require("./routes/viewPrescriptions");
+var addAvailability = require("./routes/addAvailability");
+
 // store routes here
 
 // Init App
@@ -134,6 +136,7 @@ app.use("/contactus", contactus);
 app.use("/profile", profile);
 app.use("/uploadPrescriptions", uploadPrescriptions);
 app.use("/viewPrescriptions", viewPrescriptions);
+app.use("/addAvailability", addAvailability);
 //add path to a route here
 
 // Set Port
