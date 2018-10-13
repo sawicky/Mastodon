@@ -32,12 +32,15 @@ router.post("/", ensureAuthenticated, function(req, res, next){
 
 // create a new availability object
 function createAvailabilityForDoctor(req, res , doctor, date, time){
+    var student = "";
 
     var newAvailability = new Availability({
         doctor: doctor,
         appointment: {
             date: date,
-            time: time
+            time: time,
+            student: student
+        
         }
     });
 

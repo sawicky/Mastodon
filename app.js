@@ -22,6 +22,7 @@ var routes = require("./routes/index");
 var users = require("./routes/users");
 var editDetails = require("./routes/editDetails");
 var changePassword = require("./routes/changePassword");
+var bookAppointments = require("./routes/bookAppointments");
 var viewDoctors = require("./routes/viewDoctors");
 var contactus = require("./routes/contactus");
 var profile = require("./routes/profile");
@@ -137,6 +138,7 @@ app.use("/profile", profile);
 app.use("/uploadPrescriptions", uploadPrescriptions);
 app.use("/viewPrescriptions", viewPrescriptions);
 app.use("/addAvailability", addAvailability);
+app.use("/bookAppointments", bookAppointments);
 //add path to a route here
 
 // Set Port

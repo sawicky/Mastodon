@@ -9,8 +9,8 @@ router.get('/', ensureAuthenticated, function(req, res){
 	switch (user.userType) {
 
 		case "student":
-		res.render('index');
-		console.log("User is a student, showing student index");
+		res.redirect('bookAppointments');
+		console.log("User is a student, showing student indextest");
 		break;
 
 		case "admin":

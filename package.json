@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "node_modules/.bin/wdio wdio.conf.js"
+    "test": "node_modules/.bin/wdio wdio.conf.js",
+    "hello": "echo hello back"
   },
   "author": "",
   "license": "ISC",

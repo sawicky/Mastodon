@@ -117,7 +117,7 @@ router.post("/register", function(req, res) {
 
                   html: userVerification(
                     name,
-                    `http://www.sawickers.com:3000/users/verify/${
+                    `${config.config.baseUrl}/users/verify/${
                       user.verificationCode
                     }`,
                     user.email

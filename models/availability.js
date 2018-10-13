@@ -51,4 +51,25 @@ module.exports.GetDoctorAvailability = function(username, callback) {
     var query = { doctor: username };
     Availability.findOne(query, callback);
 };
+module.exports.getAvailabilityById = function(id, callback) {
+    Availability.findById(id, callback);
+};
+module.exports.updateAvailability = function(updateUser, id, isBooked, callback) {
+    var query = null;
+    var student = updateUser.name;
+    var booked = isBooked
+    console.log("My name: "+student + " is booked: "+booked);
+    console.log("Clicked appointment ID is :" +id);
+    
+  
+    query = { $set:
+            {
+                 "appointment": {student, booked}
+            }
+    };
+    Availability.updateOne({_id: id}, query, callback);
+    console.log("Entered update availability method");
+  };
+
+
 
