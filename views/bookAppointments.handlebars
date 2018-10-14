@@ -72,20 +72,26 @@
                         </thead>
 
                         {{#each avail}}
+                        <form method="post" action="/adminManager/appointments">
+                            <input type="hidden" name="_appointmentID" value="{{this.id}}"/>
                             <tr>
                                 <td>{{this.doctor}}</td>
-                                <td> <textarea class="form-control" cols="10" rows="1">{{this.appointment.date}}</textarea> </td>
-                                <td> <textarea class="form-control" cols="5" rows="1">{{this.appointment.time}}</textarea> </td>
+                                <td> <textarea name="_date" class="form-control" cols="10" rows="1">{{this.appointment.date}}</textarea> </td>
+                                <td> <textarea name="_time" class="form-control" cols="5" rows="1">{{this.appointment.time}}</textarea> </td>
                                 <td>30 mins</td>
+
                                 {{#if this.appointment.booked}}
                                     <td style="color: red">Booked by {{this.appointment.student}}</td>
                                 {{else}}
                                     <td>Not booked</td>
                                 {{/if}}
+
                                 <td align="center">
-                                    <a title="Submit changes" class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                                    <a title="Delete this row" class="btn btn-default"><em class="fa fa-trash"></em></a>
+                                    <button id="delete" name="_deleteRow" onclick="deleteRow()" title="Delete this row" type="submit" class="btn btn-default">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
                                 </td>
+
                             </tr>
                         {{/each}}
                     </table>
@@ -100,6 +106,10 @@
 
 
 <script>
+
+    function deleteRow(){
+        document.getElementById("delete").value = true;
+    }
 
     if("{{user.userType}}" == "admin"){
         document.getElementById("admin").style.display = "block";

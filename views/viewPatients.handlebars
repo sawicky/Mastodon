@@ -24,14 +24,24 @@
                         </thead>
 
                         {{#each patients}}
+                        <form method="post" action="/adminManager/patient">
+                            <input type="hidden" name="_studentID" value="{{this.id}}"/>
                             <tr>
-                                <td> <textarea class="form-control" cols="10" rows="1">{{this.name}}</textarea> </td>
-                                <td> <textarea class="form-control" cols="10"rows="1">{{this.username}}</textarea> </td>
+                                <td> <textarea name="_name" class="form-control" cols="10"rows="1">{{this.name}}</textarea> </td>
+                                <td> <textarea name="_username" class="form-control" cols="10"rows="1">{{this.username}}</textarea> </td>
+
                                 <td align="center">
-                                    <a title="Submit changes" class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                                    <a title="Delete this row" class="btn btn-default"><em class="fa fa-trash"></em></a>
+
+                                    <button id="edit" name="_editRow" onclick="editRow()" title="Submit changes" type="submit" class="btn btn-default">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+
+                                    <button id="delete" name="_deleteRow" onclick="deleteRow()" title="Delete this row" type="submit" class="btn btn-default">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
                                 </td>
                             </tr>
+                        </form>
                         {{/each}}
 
                         </tbody>
@@ -43,3 +53,13 @@
         </section>
     </div>
 </main>
+
+<script>
+    function editRow(){
+        document.getElementById("edit").value = true;
+    }
+
+    function deleteRow(){
+        document.getElementById("delete").value = true;
+    }
+</script>

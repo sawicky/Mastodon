@@ -63,6 +63,7 @@ module.exports.deleteAllDoctorAvailability = function(username, callback) {
     Availability.deleteMany(query, callback);
 };
 
+
 module.exports.deleteAvailability = function(id, callback) {
     Availability.deleteOne({ _id: id }, callback);
 };
