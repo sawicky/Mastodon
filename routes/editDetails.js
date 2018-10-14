@@ -23,6 +23,7 @@ router.post("/", ensureAuthenticated, function(req, res) {
   var errors = req.validationErrors();
 
   if (errors) {
+    res.status(302);
     res.render("editDetails", {
       loggedinUser: req.user,
 
@@ -73,6 +74,7 @@ router.post("/", ensureAuthenticated, function(req, res) {
                 return;
               }
               req.flash("success_msg", "You are updated");
+              res.status(200);
               res.render("editDetails", {
                 loggedinUser: user
               });
