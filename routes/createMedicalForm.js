@@ -10,25 +10,31 @@ router.get("/", ensureAuthenticated, function(req, res) {
 
 router.post("/", ensureAuthenticated, function(req, res) {
   validation(req, res);
-  createMedicalForm(req, res, newMedicalForm);
-});
-function validation(req,res) {
-  req.checkBody("name", "Name is required").notEmpty();
-  req.checkBody("dob", "Name is required").notEmpty();
-  req.checkBody("postCode", "Postcode is required").notEmpty();
-  req.checkBody("foneNo", "Phone number is required").notEmpty();
-  req.checkBody("mdcNo", "Medicare number is required").notEmpty();
-}
-function createMedicalForm(req, res, newMedicalForm) {
+
   var name = req.body.name;
+  var studentID = req.body.studentID;
   var dob = req.body.dob;
   var postCode = req.body.postcode;
   var foneNo = req.body.foneNo;
   var mdcNo = req.body.mdcNo;
   var desc = req.body.description;
 
+  createMedicalForm(req, res, name, studentID, dob, postCode, foneNo, mdcNo, desc );
+});
+
+function validation(req,res) {
+  req.checkBody("name", "Name is required").notEmpty();
+  req.checkBody("dob", "Day of birth is required").notEmpty();
+  req.checkBody("studenID", "Student ID is required").notEmpty();
+  req.checkBody("postCode", "Postcode is required").notEmpty();
+  req.checkBody("foneNo", "Phone number is required").notEmpty();
+  req.checkBody("mdcNo", "Medicare number is required").notEmpty();
+}
+
+function createMedicalForm(req, res, name,studentID,dob,postCode,foneNo,mdcNo,desc) {
   var newMedicalForm = MedicalForm({
     name: name,
+    studentID: studentID,
     dob: dob,
     postCode: postCode,
     foneNo: foneNo,

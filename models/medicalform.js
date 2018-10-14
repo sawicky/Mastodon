@@ -7,7 +7,7 @@ var MedicalFormSchema = mongoose.Schema({
         type: String
     },
     studentID:{
-        type: Number,
+        type: String,
         index: true
     },
     dob: {
@@ -23,7 +23,8 @@ var MedicalFormSchema = mongoose.Schema({
         type: Number
     },
     description:{
-        type: String
+        type: String,
+        required: false
     }
 });
 
