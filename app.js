@@ -32,6 +32,7 @@ var addAvailability = require("./routes/addAvailability");
 var adminManager = require("./routes/adminManager");
 var addUser = require("./routes/addUser");
 var createMedicalForm = require("./routes/createMedicalForm");
+var viewAvailability = require("./routes/viewAvailability");
 
 // store routes here
 
@@ -134,6 +135,7 @@ app.use("/bookAppointments", bookAppointments);
 app.use("/adminManager", adminManager);
 app.use('/addUser', addUser);
 app.use("/createMedicalForm", createMedicalForm);
+app.use("/viewAvailability", viewAvailability);
 //add path to a route here
 
 // Set Port
