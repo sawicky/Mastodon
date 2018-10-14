@@ -49,23 +49,22 @@ nodemailer.createTestAccount((err, account) => {
 router.get("/", ensureAuthenticated, function(req, res) {
     var user = req.user
     viewAllDoctors(res, req, user);
-
 });
 
 // ID Parameter URL
 router.get("/:id", ensureAuthenticated, function(req, res) {
     var id = req.params.id;
     updateBooking(res, req.params.id, req);
-    
+
 });
 
 // This function will find all the doctors in the DB.
 function viewAllDoctors(res, req, user){
     var currentUser = user;
     console.log(currentUser);
-    
+
     Availability.find({}, function (error, availabilities) {
-        
+
         res.render("bookAppointments", {avail: availabilities, user: currentUser});
     });
 
@@ -118,20 +117,18 @@ function updateBooking(res, id, req) {
             Availability.find({}, function (error, availabilities) {
                 res.render("bookAppointments", {error: "No appointments found with this ID", avail: availabilities, user: user});
             });
-            return;
+            // Availability.updateAvailability(user.name, id, true, function(err, availability) {
+            //     if (err) {
+            //         console.log("Error updating availability: "+err);
+            //         throw err;
+            //     }
+            //     viewAllDoctors(res)
+            // });
+
+
         }
-        
     });
-    // Availability.updateAvailability(user.name, id, true, function(err, availability) {
-    //     if (err) {
-    //         console.log("Error updating availability: "+err);
-    //         throw err;
-    //     }
-    //     viewAllDoctors(res)
-    // });
-
-    
-
 }
+
 
 module.exports = router;
