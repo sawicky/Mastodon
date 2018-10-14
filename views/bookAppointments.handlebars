@@ -3,11 +3,56 @@
         <section class="col-lg-8">
 
             <!-- TABLE -->
-            <div class="panel panel-default panel-table mytable">
+            <div id="student" style="display: none" class="panel panel-default panel-table mytable">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col col-xs-6">
                             <h3 class="panel-title tableheading">Book Appointment</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- student view -->
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-list">
+
+                        <thead>
+                        <tr>
+                            <th>Doctor</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Duration</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+
+                        {{#each avail}}
+			            <tr>
+				                <td>{{this.doctor}}</td>
+                                <td>{{this.appointment.date}}</td>
+                                <td>{{this.appointment.time}}</td>
+				                <td>30 mins</td>
+                                {{#if this.appointment.booked}}
+                                    {{#ifEquals this.appointment.student "{{user.name}}"}}
+                                        <td bgcolor="#e5f442">Booked by you</td>
+                                    {{else}}
+                                        <td bgcolor="#ff5e5e">Booked</td>
+                                     {{/ifEquals}}
+                                {{else}}
+                                    <td bgcolor="#99ff99"><a href="/bookAppointments/{{this.id}}">Book</a></td>
+                                {{/if}}
+			            </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </div>
+
+            <!-- Admin view -->
+            <div id="admin" style="display: none" class="panel panel-default panel-table mytable">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-xs-6">
+                            <h3 class="panel-title tableheading">View Appointments</h3>
                         </div>
                     </div>
                 </div>
@@ -22,30 +67,45 @@
                             <th>Time</th>
                             <th>Duration</th>
                             <th>Status</th>
+                            <th><em class="fa fa-cog"></em></th>
                         </tr>
                         </thead>
-                        
-            {{#each avail}}            
-			            <tr>
-				                <td>{{this.doctor}}</td>
-                                <td>{{this.appointment.date}}</td>
-                                <td>{{this.appointment.time}}</td>
-				                <td>30 mins</td>
-                                {{#if this.appointment.booked}}
-                                    <td>Booked</td>
-                                {{else}}
-                                    <td bgcolor="#99ff99"><a href="/bookAppointments/{{this.id}}">Book</a></td>
-                                {{/if}}
-			</tr>
-            {{/each}}
-                        
 
-                        
+                        {{#each avail}}
+                            <tr>
+                                <td>{{this.doctor}}</td>
+                                <td> <textarea class="form-control" cols="10" rows="1">{{this.appointment.date}}</textarea> </td>
+                                <td> <textarea class="form-control" cols="5" rows="1">{{this.appointment.time}}</textarea> </td>
+                                <td>30 mins</td>
+                                {{#if this.appointment.booked}}
+                                    <td style="color: red">Booked by {{this.appointment.student}}</td>
+                                {{else}}
+                                    <td>Not booked</td>
+                                {{/if}}
+                                <td align="center">
+                                    <a title="Submit changes" class="btn btn-default"><em class="fa fa-pencil"></em></a>
+                                    <a title="Delete this row" class="btn btn-default"><em class="fa fa-trash"></em></a>
+                                </td>
+                            </tr>
+                        {{/each}}
                     </table>
                 </div>
             </div>
+
             <!-- TABLE END -->
 
         </section>
     </div>
 </main>
+
+
+<script>
+
+    if("{{user.userType}}" == "admin"){
+        document.getElementById("admin").style.display = "block";
+
+    } else if("{{user.userType}}" == "student") {
+        document.getElementById("student").style.display = "block";
+    }
+
+</script>

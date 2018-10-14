@@ -2,11 +2,10 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
 var Availability = require("../models/availability");
-var user;
 
 
 router.get("/", ensureAuthenticated, function(req, res) {
-    viewAllDoctors(res);
+    viewAllDoctors(res, req);
 
 });
 
@@ -18,8 +17,8 @@ router.get("/:id", ensureAuthenticated, function(req, res) {
 });
 
 // This function will find all the doctors in the DB.
-function viewAllDoctors(res){
-    console.log("test");
+function viewAllDoctors(res, req){
+    
     Availability.find({}, function (error, availabilities) {
         console.log("My appoints are :" + availabilities);
         console.log("Error is " + error);
@@ -45,7 +44,6 @@ function updateBooking(res, id, req) {
     var user = req.user;
     console.log("My user is :" +user);
     console.log("My id is :" +id);
-    Availability.findOneAndUpdate
     Availability.updateAvailability(user.name, id, true, function(err, availability) {
         console.log("Entered update avail callback");
         if (err) {

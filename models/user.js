@@ -58,6 +58,11 @@ module.exports.getUserByUsername = function(username, callback) {
 module.exports.getUserById = function(id, callback) {
   User.findById(id, callback);
 };
+
+module.exports.deleteUser = function(id, callback) {
+    User.deleteOne({ _id: id }, callback);
+};
+
 module.exports.getUserByNameAndId = function(name, id, callback) {
   var query = { username: name, _id: { $ne: id } };
   User.findOne(query, callback);
@@ -83,6 +88,22 @@ module.exports.updateUser = function(updateUser, id, callback) {
   };
   User.findOneAndUpdate({ _id: id }, query, { new: true }, callback);
 };
+
+
+module.exports.AdminUpdateUser = function(updateUser, id, callback) {
+    var query = null;
+    var username = updateUser.username;
+    var name = updateUser.name;
+    var specialty = updateUser.specialty;
+
+    query = { $set:
+            {
+                username, name, specialty
+            }
+    };
+    User.findOneAndUpdate({ _id: id }, query, { new: true }, callback);
+};
+
 
 module.exports.updatePassword = function(id, password, callback) {
   var query = null;

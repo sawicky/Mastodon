@@ -21,3 +21,8 @@ var Prescription = (module.exports = mongoose.model("Prescription", Prescription
 module.exports.AddPrescription = function(newPrescription, callback) {
     newPrescription.save(callback);
 };
+
+module.exports.deleteAllDoctorPrescriptions = function(username, callback) {
+    var query = { doctor: username };
+    Prescription.deleteMany(query, callback);
+};

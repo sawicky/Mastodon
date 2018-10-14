@@ -29,6 +29,7 @@ var profile = require("./routes/profile");
 var uploadPrescriptions = require("./routes/uploadPrescriptions");
 var viewPrescriptions = require("./routes/viewPrescriptions");
 var addAvailability = require("./routes/addAvailability");
+var adminManager = require("./routes/adminManager");
 
 // store routes here
 
@@ -39,19 +40,8 @@ var app = express();
 
 // View Engine
 app.engine("handlebars", exphbs({ defaultLayout: "layout",
-helpers:{
-  // Function to do basic mathematical operation in handlebar
-  math: function(lvalue, operator, rvalue) {lvalue = parseFloat(lvalue);
-      rvalue = parseFloat(rvalue);
-      return {
-          "+": lvalue + rvalue,
-          "-": lvalue - rvalue,
-          "*": lvalue * rvalue,
-          "/": lvalue / rvalue,
-          "%": lvalue % rvalue
-      }[operator];
-  }
-} }));
+helpers: require("./helpers/helpers.js").helpers }
+));
 
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
@@ -139,6 +129,7 @@ app.use("/uploadPrescriptions", uploadPrescriptions);
 app.use("/viewPrescriptions", viewPrescriptions);
 app.use("/addAvailability", addAvailability);
 app.use("/bookAppointments", bookAppointments);
+app.use("/adminManager", adminManager);
 //add path to a route here
 
 // Set Port
