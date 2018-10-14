@@ -30,6 +30,7 @@ var uploadPrescriptions = require("./routes/uploadPrescriptions");
 var viewPrescriptions = require("./routes/viewPrescriptions");
 var addAvailability = require("./routes/addAvailability");
 var adminManager = require("./routes/adminManager");
+var createMedicalForm = require("./routes/createMedicalForm");
 
 // store routes here
 
@@ -130,6 +131,7 @@ app.use("/viewPrescriptions", viewPrescriptions);
 app.use("/addAvailability", addAvailability);
 app.use("/bookAppointments", bookAppointments);
 app.use("/adminManager", adminManager);
+app.use("/createMedicalForm", createMedicalForm);
 //add path to a route here
 
 // Set Port

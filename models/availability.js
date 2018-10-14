@@ -28,6 +28,10 @@ var AvailabilitySchema = mongoose.Schema({
             type: Boolean,
             default: false
         },
+        studentId: {
+            type: String,
+            required: false
+        },
 
         student: {
             type: String,
@@ -81,6 +85,32 @@ module.exports.updateAvailability = function(updateUser, id, isBooked, callback)
             }
     };
     Availability.updateOne({_id: id}, query, callback);
+    query = { $set:
+        {
+             "appointment.student" : student, "appointment.booked" :booked
+        }
+        };
+    Availability.findById(id, function(err, availability) {
+        //If the clicked availability is not already booked
+        if (availability) {
+            if (availability.appointment.booked == false) {
+                //Update it
+            Availability.updateOne({_id: id}, query, callback);
+             } else {
+                // Appointment already booked
+                return;
+
+             }
+        } else {
+            //No appointment found with that ID
+            return;
+        }
+
+    });
+
+
+
+
     console.log("Entered update availability method");
   };
 

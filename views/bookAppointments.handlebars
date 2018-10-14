@@ -37,6 +37,10 @@
                                         <td bgcolor="#e5f442">Booked by you</td>
                                     {{else}}
                                         <td bgcolor="#ff5e5e">Booked</td>
+                                    {{#ifEquals this.appointment.studentId ../user._id}}
+                                        <td bgcolor="#e5f442" id="bookedStatus">Booked by you</td>
+                                    {{else}}
+                                        <td bgcolor="#ff5e5e" id="bookedStatus">Booked</td>
                                      {{/ifEquals}}
                                 {{else}}
                                     <td bgcolor="#99ff99"><a href="/bookAppointments/{{this.id}}">Book</a></td>

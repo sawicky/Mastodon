@@ -14,7 +14,6 @@
     "bcryptjs": "*",
     "body-parser": "*",
     "casperjs": "^1.1.4",
-    "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
@@ -23,7 +22,6 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
-    "mocha": "^5.2.0",
     "mongodb": "*",
     "mongoose": "*",
     "nodemailer": "^4.6.8",
@@ -34,6 +32,10 @@
     "webdriverio": "^4.13.2"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "superagent": "^4.0.0-beta.5",
+    "supertest": "^3.3.0",
     "wdio-mocha-framework": "^0.6.3"
   }
 }
