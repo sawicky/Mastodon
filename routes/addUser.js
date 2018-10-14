@@ -45,7 +45,7 @@ router.post("/",ensureAuthenticated, function(req, res) {
                 //User already exists
                 console.log("User already exists: "+user);
                 res.render("addUser", {
-                    errors: "User already exists!"
+                    error: "User already exists!"
                   });
               } else {
                 //Send an email

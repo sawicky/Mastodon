@@ -191,11 +191,13 @@ passport.deserializeUser(function(id, done) {
   });
 });
 router.get("/registerSpecial/:code", (req, res) => {
-  req.logOut();
+  if (req.user) {
+    return res.redirect("/");
+  }
   var verification = req.params.code;
   User.findOne({verificationCode : verification}, function (err, user) {
     if (user) {
-      res.render("finishAccount", {userTemp: user});
+      res.render("finishAccount", {userType: user.userType, userId: user._id});
     } else {
       res.render("finishAccount", {error: "Link has expired."});
     }
