@@ -48,48 +48,61 @@ function updateBooking(res, id, req) {
         if (err) {
             console.log("Error");
             throw err;
-    query = { $set:
-        {
-             "appointment.student" : req.user.name, "appointment.booked" :true, "appointment.studentId" : req.user._id
-        }
-        };
+            query = {
+                $set:
+                    {
+                        "appointment.student": req.user.name,
+                        "appointment.booked": true,
+                        "appointment.studentId": req.user._id
+                    }
+            };
 
-    Availability.findById(id, function(err, availability) {
-        //If the clicked availability is not already booked
-        if (availability) {
-            if (availability.appointment.booked == false) {
-                console.log("Clicked appointment is not booked");
-                //Update it
-            Availability.updateOne({_id: id}, query, function(err, availability) {
-                if (err) throw err;
-                viewAllDoctors(res, req, user);
+            Availability.findById(id, function (err, availability) {
+                //If the clicked availability is not already booked
+                if (availability) {
+                    if (availability.appointment.booked == false) {
+                        console.log("Clicked appointment is not booked");
+                        //Update it
+                        Availability.updateOne({_id: id}, query, function (err, availability) {
+                            if (err) throw err;
+                            viewAllDoctors(res, req, user);
+                        });
+                    } else {
+                        Availability.find({}, function (error, availabilities) {
+                            console.log("My userID :" + user._id);
+                            res.render("bookAppointments", {
+                                error: "This appointment is already booked",
+                                avail: availabilities,
+                                user: user
+                            });
+                        });
+                        return;
+
+                    }
+                } else {
+                    Availability.find({}, function (error, availabilities) {
+                        res.render("bookAppointments", {
+                            error: "No appointments found with this ID",
+                            avail: availabilities,
+                            user: user
+                        });
+                    });
+                    return;
+                }
+
             });
-             } else {
-                Availability.find({}, function (error, availabilities) {
-                    console.log("My userID :"+user._id);
-                    res.render("bookAppointments", {error: "This appointment is already booked", avail: availabilities, user: user});
-                });
-                return;
+            // Availability.updateAvailability(user.name, id, true, function(err, availability) {
+            //     if (err) {
+            //         console.log("Error updating availability: "+err);
+            //         throw err;
+            //     }
+            //     viewAllDoctors(res)
+            // });
 
-             }
-        } else {
-            Availability.find({}, function (error, availabilities) {
-                res.render("bookAppointments", {error: "No appointments found with this ID", avail: availabilities, user: user});
-            });
-            return;
+
         }
-
     });
-    // Availability.updateAvailability(user.name, id, true, function(err, availability) {
-    //     if (err) {
-    //         console.log("Error updating availability: "+err);
-    //         throw err;
-    //     }
-    //     viewAllDoctors(res)
-    // });
-
-
-
 }
+
 
 module.exports = router;
