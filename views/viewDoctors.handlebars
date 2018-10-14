@@ -20,6 +20,7 @@
                             <th>Doctor's Name</th>
                             <th>Profile</th>
                             <th>Book</th>
+                            <th>Availabilities</th>
                         </tr>
                         </thead>
 
@@ -36,6 +37,15 @@
                                     <a href="/viewAvailability/{{this.id}}">
                                         <img class="icon" src="../images/Available.png">
                                     </a>
+                                </td>
+                                <td>
+                                    
+                                    {{#each ../availabilities}}
+                                        {{#ifEquals this.doctor ../this.username}}
+                                            {{this.appointment.date}} - {{this.appointment.time}}
+                                            <br>
+                                        {{/ifEquals}}
+                                    {{/each}}
                                 </td>
                             </tr>
                         {{/each}}
