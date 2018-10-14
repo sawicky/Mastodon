@@ -56,7 +56,7 @@ module.exports.getAvailabilityById = function(id, callback) {
 };
 module.exports.updateAvailability = function(updateUser, id, isBooked, callback) {
     var query = null;
-    var student = updateUser.name;
+    var student = updateUser;
     var booked = isBooked
     console.log("My name: "+student + " is booked: "+booked);
     console.log("Clicked appointment ID is :" +id);
@@ -64,7 +64,7 @@ module.exports.updateAvailability = function(updateUser, id, isBooked, callback)
   
     query = { $set:
             {
-                 "appointment": {student, booked}
+                 "appointment.student" : student, "appointment.booked" :booked
             }
     };
     Availability.updateOne({_id: id}, query, callback);

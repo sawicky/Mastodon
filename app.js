@@ -39,19 +39,8 @@ var app = express();
 
 // View Engine
 app.engine("handlebars", exphbs({ defaultLayout: "layout",
-helpers:{
-  // Function to do basic mathematical operation in handlebar
-  math: function(lvalue, operator, rvalue) {lvalue = parseFloat(lvalue);
-      rvalue = parseFloat(rvalue);
-      return {
-          "+": lvalue + rvalue,
-          "-": lvalue - rvalue,
-          "*": lvalue * rvalue,
-          "/": lvalue / rvalue,
-          "%": lvalue % rvalue
-      }[operator];
-  }
-} }));
+helpers: require("./helpers/helpers.js").helpers }
+));
 
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
