@@ -15,7 +15,6 @@
                 <!-- student view -->
                 <div class="panel-body">
                     <table class="table table-striped table-bordered table-list">
-
                         <thead>
                         <tr>
                             <th>Doctor</th>
@@ -114,7 +113,7 @@
     if("{{user.userType}}" == "admin"){
         document.getElementById("admin").style.display = "block";
 
-    } else if("{{user.userType}}" == "student") {
+    } else if("{{user.userType}}" == "student"){
         document.getElementById("student").style.display = "block";
     }
 

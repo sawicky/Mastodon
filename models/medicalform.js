@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var MedicalFormSchema = mongoose.Schema({
 
-    // stores prescription for that student and the doctor that created the prescription
+    // store students medical form inputs
     name: {
         type: String
     },
@@ -38,7 +38,6 @@ var MedicalForm = (module.exports = mongoose.model("MedicalForm", MedicalFormSch
 module.exports.AddMedicalForm = function(newMedicalForm, callback) {
     newMedicalForm.save(callback);
 };
-
 module.exports.getMedicalFormByStudentID = function(id, callback) {
     var query = {studentID : id};
     MedicalForm.findOne(query, callback);

@@ -29,7 +29,7 @@ router.post("/", ensureAuthenticated, function(req, res){
 
 // DB query to find the object based on the student ID
 function createPrescriptionForStudent(req, res, student , doctor, description){
-
+    
     User.getUserByUsername(student, function(err, studentFound) {
         if(err)
             req.flash("error_msg", "Couldn't find patient");
