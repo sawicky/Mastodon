@@ -158,9 +158,9 @@ passport.use(
         return done(null, false, { message: "Unknown User" });
       }
       //GARY IF USER IS NOT VERIFIED AND TRY TO LOGIN
-      if (!user.verificationStatus) {
-        return done(null, false, { message: "User is not verified" });
-      }
+      // if (!user.verificationStatus) {
+      //   return done(null, false, { message: "User is not verified" });
+      // }
       User.comparePassword(password, user.password, function(err, isMatch) {
         // Throw error if password was not matched
         if (err) throw err;

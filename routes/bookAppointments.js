@@ -40,21 +40,45 @@ function ensureAuthenticated(req, res, next) {
     }
 }
 function updateBooking(res, id, req) {
-    console.log("Entered update booking method");
     var user = req.user;
-    console.log("My user is :" +user);
-    console.log("My id is :" +id);
-    Availability.updateAvailability(user.name, id, true, function(err, availability) {
-        console.log("Entered update avail callback");
-        if (err) {
-            console.log("Error");
-            throw err;
-        } else {
-            console.log(availability);
+    query = { $set:
+        {
+             "appointment.student" : req.user.name, "appointment.booked" :true
         }
-        req.flash("success_msg", "You are updated");
-        viewAllDoctors(res)
+        };
+
+    Availability.findById(id, function(err, availability) {
+        //If the clicked availability is not already booked
+        if (availability) {
+            if (availability.appointment.booked == false) {
+                console.log("Clicked appointment is not booked");
+                //Update it
+            Availability.updateOne({_id: id}, query, function(err, availability) {
+                if (err) throw err;
+                viewAllDoctors(res, req);
+            });
+             } else {
+                Availability.find({}, function (error, availabilities) {
+                    res.render("bookAppointments", {error: "This appointment is already booked", avail: availabilities});
+                });
+                return; 
+
+             }
+        } else {
+            Availability.find({}, function (error, availabilities) {
+                res.render("bookAppointments", {error: "No appointments found with this ID", avail: availabilities});
+            });
+            return;
+        }
+        
     });
+    // Availability.updateAvailability(user.name, id, true, function(err, availability) {
+    //     if (err) {
+    //         console.log("Error updating availability: "+err);
+    //         throw err;
+    //     }
+    //     viewAllDoctors(res)
+    // });
 
     
 

@@ -58,16 +58,32 @@ module.exports.updateAvailability = function(updateUser, id, isBooked, callback)
     var query = null;
     var student = updateUser;
     var booked = isBooked
-    console.log("My name: "+student + " is booked: "+booked);
-    console.log("Clicked appointment ID is :" +id);
+    query = { $set:
+        {
+             "appointment.student" : student, "appointment.booked" :booked
+        }
+        };
+    Availability.findById(id, function(err, availability) {
+        //If the clicked availability is not already booked
+        if (availability) {
+            if (availability.appointment.booked == false) {
+                //Update it
+            Availability.updateOne({_id: id}, query, callback);
+             } else {
+                // Appointment already booked
+                return; 
+
+             }
+        } else {
+            //No appointment found with that ID
+            return;
+        }
+        
+    });
     
   
-    query = { $set:
-            {
-                 "appointment.student" : student, "appointment.booked" :booked
-            }
-    };
-    Availability.updateOne({_id: id}, query, callback);
+
+    
     console.log("Entered update availability method");
   };
 
