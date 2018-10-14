@@ -22,6 +22,11 @@ var MedicalFormSchema = mongoose.Schema({
     mdcNo: {
         type: Number
     },
+    injury: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     description:{
         type: String,
         required: false
@@ -32,4 +37,9 @@ var MedicalForm = (module.exports = mongoose.model("MedicalForm", MedicalFormSch
 
 module.exports.AddMedicalForm = function(newMedicalForm, callback) {
     newMedicalForm.save(callback);
+};
+
+module.exports.getMedicalFormByStudentID = function(id, callback) {
+    var query = {studentID : id};
+    MedicalForm.findOne(query, callback);
 };

@@ -301,15 +301,15 @@ router.get("/verify/:code", (req, res) => {
   //   )
   //   .then(result => {
 });
-router.post(
-  "/login",
+router.post("/login",
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/users/login",
     failureFlash: true
   }),
   function(req, res) {
-    res.redirect("/dashboard");
+    res.status(200)
+    res.redirect(200, "/dashboard");
   }
 );
 
@@ -317,7 +317,7 @@ router.get("/logout", function(req, res) {
   req.logout();
 
   req.flash("success_msg", "You are logged out");
-
+  res.status(200);
   res.redirect("/users/login");
 });
 

@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "node_modules/.bin/wdio wdio.conf.js",
+    "test": "node_modules/mocha/bin/mocha ./test",
+    "test-mocha": "node_modules/mocha/bin/mocha ./tests",
     "hello": "echo hello back"
   },
   "author": "",
