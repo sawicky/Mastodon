@@ -20,22 +20,24 @@ router.get("/", ensureAuthenticated, function(req, res) {
 // This will fire when doctors fills in his availability details
 router.post("/", ensureAuthenticated, function(req, res, next){
 
-    var doctor = user.username;
+    var doctor = user.name;
+    var doctorId = user._id;
     var date = req.body.date;
     var time = req.body.time;
 
-    createAvailabilityForDoctor(req, res, doctor, date, time);
+    createAvailabilityForDoctor(req, res, doctor, date, time, doctorId);
 });
 
 
 
 
 // create a new availability object
-function createAvailabilityForDoctor(req, res , doctor, date, time){
+function createAvailabilityForDoctor(req, res , doctor, date, time, doctorId){
     var student = "";
 
     var newAvailability = new Availability({
         doctor: doctor,
+        doctorId: doctorId,
         appointment: {
             date: date,
             time: time,

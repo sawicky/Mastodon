@@ -14,6 +14,9 @@ var AvailabilitySchema = mongoose.Schema({
     doctor: {
         type: String
     },
+    doctorId: {
+        type: String
+    },
 
     appointment: {
         date: {
