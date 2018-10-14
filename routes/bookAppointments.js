@@ -5,7 +5,8 @@ var Availability = require("../models/availability");
 
 
 router.get("/", ensureAuthenticated, function(req, res) {
-    viewAllDoctors(res, req);
+    var user = req.user
+    viewAllDoctors(res, req, user);
 
 });
 
@@ -17,13 +18,13 @@ router.get("/:id", ensureAuthenticated, function(req, res) {
 });
 
 // This function will find all the doctors in the DB.
-function viewAllDoctors(res, req){
+function viewAllDoctors(res, req, user){
+    var currentUser = user.name;
+    console.log(currentUser);
     
     Availability.find({}, function (error, availabilities) {
-        console.log("My appoints are :" + availabilities);
-        console.log("Error is " + error);
         
-        res.render("bookAppointments", {avail: availabilities});
+        res.render("bookAppointments", {avail: availabilities, user: currentUser});
     });
 
     // User.find({userType: "doctor"}, function (err, docs) {
@@ -59,14 +60,14 @@ function updateBooking(res, id, req) {
             });
              } else {
                 Availability.find({}, function (error, availabilities) {
-                    res.render("bookAppointments", {error: "This appointment is already booked", avail: availabilities});
+                    res.render("bookAppointments", {error: "This appointment is already booked", avail: availabilities, user: user});
                 });
                 return; 
 
              }
         } else {
             Availability.find({}, function (error, availabilities) {
-                res.render("bookAppointments", {error: "No appointments found with this ID", avail: availabilities});
+                res.render("bookAppointments", {error: "No appointments found with this ID", avail: availabilities, user: user});
             });
             return;
         }
