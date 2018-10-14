@@ -14,7 +14,7 @@ var AvailabilitySchema = mongoose.Schema({
     doctor: {
         type: String
     },
-    
+
     appointment: {
         date: {
             type: String
@@ -62,7 +62,6 @@ module.exports.deleteAllDoctorAvailability = function(username, callback) {
     var query = { doctor: username };
     Availability.deleteMany(query, callback);
 };
-
 
 module.exports.deleteAvailability = function(id, callback) {
     Availability.deleteOne({ _id: id }, callback);

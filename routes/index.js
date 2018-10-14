@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require("../models/user");
+var Availability = require("../models/availability");
 
 // Get Homepage if user is logged on, otherwise direct them to /users/login
 router.get('/', ensureAuthenticated, function(req, res){
@@ -19,7 +20,11 @@ router.get('/', ensureAuthenticated, function(req, res){
 		break;
 
 		case "doctor":
-		res.render("indexDoctor");
+        Availability.find({doctor: user.username}, function (err, availability) {
+            res.render("indexDoctor", {
+                availability: availability,
+            });
+        });
 		console.log("User is doctor, showing doctor page");
 		break;
 
@@ -28,7 +33,6 @@ router.get('/', ensureAuthenticated, function(req, res){
 		console.log("User was not any type - normal index page");
 	}
 });
-
 
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
