@@ -6,25 +6,31 @@ var userType;
 var UserSchema = mongoose.Schema({
   username: {
     type: String,
-    index: true
+    index: true,
+    required: false
   },
   password: {
-    type: String
+    type: String,
+    required: false
   },
   email: {
     type: String
   },
   name: {
-    type: String
+    type: String,
+    required: false
   },
   userType: {
-    type: String
+    type: String,
+    required: false
   },
   bio: {
-    type: String
+    type: String,
+    required: false
   },
   specialty: {
-    type: String
+    type: String,
+    required: false
   },
   // FOR VERIFICATION GARY
   verificationStatus: { type: Boolean, default: false },
@@ -72,6 +78,11 @@ module.exports.getUserByEmailAndId = function(email, id, callback) {
   var query = { email: email, _id: { $ne: id } };
   User.findOne(query, callback);
 };
+
+module.exports.getUserByEmail = function(email, callback) {
+  var query = { email : email };
+  User.findOne(query, callback);
+}
 
 module.exports.updateUser = function(updateUser, id, callback) {
   var query = null;

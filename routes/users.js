@@ -6,6 +6,7 @@ var mongoose = require("mongoose");
 var User = require("../models/user");
 var config = require("../wdio.conf");
 const nodemailer = require("nodemailer");
+var bcrypt = require("bcryptjs");
 var userVerification = require("./templates/userVerification");
 //Creating  transporter for Mail Sending
 let transporter = null;
@@ -41,7 +42,6 @@ router.post("/register", function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   var password2 = req.body.password2;
-  var type = req.body.type;
   var bio = req.body.bio;
   var specialty = req.body.specialty;
 
@@ -85,19 +85,24 @@ router.post("/register", function(req, res) {
             }
           },
           function(err, mail) {
-            if (user || mail) {
-              res.render("register", {
-                user: user,
-                mail: mail
+            if (user) {
+              var errorString ="Username has already been taken";
+              return res.render("register", {
+                error: errorString
               });
-            } else {
+            } if (mail) {
+              var errorString ="Email has already been taken";
+              return res.render("register", {
+                error: errorString
+              });
+            }else {
               // Creates a new user object
               var newUser = new User({
                 name: name,
                 email: email,
                 username: username,
                 password: password,
-                userType: type,
+                userType: "student",
                 bio: bio,
                 verificationCode: mongoose.Types.ObjectId(),
                 specialty: specialty
@@ -158,9 +163,9 @@ passport.use(
         return done(null, false, { message: "Unknown User" });
       }
       //GARY IF USER IS NOT VERIFIED AND TRY TO LOGIN
-      // if (!user.verificationStatus) {
-      //   return done(null, false, { message: "User is not verified" });
-      // }
+      if (!user.verificationStatus) {
+        return done(null, false, { message: "User is not verified" });
+      }
       User.comparePassword(password, user.password, function(err, isMatch) {
         // Throw error if password was not matched
         if (err) throw err;
@@ -184,6 +189,78 @@ passport.deserializeUser(function(id, done) {
   User.getUserById(id, function(err, user) {
     done(err, user);
   });
+});
+router.get("/registerSpecial/:code", (req, res) => {
+  req.logOut();
+  var verification = req.params.code;
+  User.findOne({verificationCode : verification}, function (err, user) {
+    if (user) {
+      res.render("finishAccount", {userTemp: user});
+    } else {
+      res.render("finishAccount", {error: "Link has expired."});
+    }
+  })
+})
+router.post("/registerSpecial/confirm", (req, res) => {
+  var name = req.body.name;
+  var username = req.body.username;
+  var password = req.body.password;
+  var password2 = req.body.password2;
+  var bio = req.body.bio;
+  var specialty = req.body.specialty;
+  var id = req.body.id;
+  console.log("my post id is :"+id);
+
+  // Validation
+  req.checkBody("name", "Name is required").notEmpty();
+  req.checkBody("password", "Password is required").notEmpty();
+  req
+    .checkBody("password2", "Passwords do not match ")
+    .equals(req.body.password);
+  req
+    .checkBody(
+      "password",
+      "Password must include one lowercase character, one uppercase character, a number, and a special character"
+    )
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,}$/, "i");
+  var errors = req.validationErrors();
+
+  if (errors) {
+    res.render("finishAccount", {
+      errors: errors
+    });
+  } else {
+    //Check if username already exists
+    User.getUserByUsername(username, function(err, user) {
+      if (user) {
+        res.render("finishAccount", {errors: "You have already finalized your account"});
+      } else {
+        User.getUserById(id, function(err, user) {
+          if (user) {
+            bcrypt.genSalt(10, function(err, salt) {
+              bcrypt.hash(password, salt, function(err, hash) {
+                password = hash;
+                var query = { $set: {
+                  username: username, name: name, password: password, bio: bio, verificationCode: id, specialty: specialty, verificationStatus: true
+                }}
+                User.updateOne({_id : id}, query, function(err, user) {
+                  if (user) {
+                    console.log("success");
+                    res.redirect("/users/login");
+                  } else {
+                    console.log("could not find user");
+                  }
+                })
+                
+              });
+            });
+          } else {
+            res.render("finishAccount", {errors: "Couldn't find an account with that ID"});
+          }
+        })
+      }
+    });
+  }
 });
 //BUTTON IN EMAIL WILL CALL THIS ROUTE GARY
 router.get("/verify/:code", (req, res) => {
