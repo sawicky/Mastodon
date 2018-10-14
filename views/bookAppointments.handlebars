@@ -32,7 +32,7 @@
                                 <td>{{this.appointment.time}}</td>
 				                <td>30 mins</td>
                                 {{#if this.appointment.booked}}
-                                    {{#ifEquals this.appointment.student ../user}}
+                                    {{#ifEquals this.appointment.studentId ../user._id}}
                                         <td bgcolor="#e5f442" id="bookedStatus">Booked by you</td>
                                     {{else}}
                                         <td bgcolor="#ff5e5e" id="bookedStatus">Booked</td>

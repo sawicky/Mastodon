@@ -19,7 +19,7 @@ router.get("/:id", ensureAuthenticated, function(req, res) {
 
 // This function will find all the doctors in the DB.
 function viewAllDoctors(res, req, user){
-    var currentUser = user.name;
+    var currentUser = user;
     console.log(currentUser);
     
     Availability.find({}, function (error, availabilities) {
@@ -44,7 +44,7 @@ function updateBooking(res, id, req) {
     var user = req.user;
     query = { $set:
         {
-             "appointment.student" : req.user.name, "appointment.booked" :true
+             "appointment.student" : req.user.name, "appointment.booked" :true, "appointment.studentId" : req.user._id
         }
         };
 
@@ -56,10 +56,11 @@ function updateBooking(res, id, req) {
                 //Update it
             Availability.updateOne({_id: id}, query, function(err, availability) {
                 if (err) throw err;
-                viewAllDoctors(res, req);
+                viewAllDoctors(res, req, user);
             });
              } else {
                 Availability.find({}, function (error, availabilities) {
+                    console.log("My userID :"+user._id);
                     res.render("bookAppointments", {error: "This appointment is already booked", avail: availabilities, user: user});
                 });
                 return; 

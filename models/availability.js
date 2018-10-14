@@ -28,6 +28,10 @@ var AvailabilitySchema = mongoose.Schema({
             type: Boolean,
             default: false
         },
+        studentId: {
+            type: String,
+            required: false
+        },
 
         student: {
             type: String,
