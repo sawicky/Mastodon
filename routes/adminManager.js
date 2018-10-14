@@ -7,7 +7,9 @@ var Prescription = require("../models/prescription");
 
 router.get("/doctor", ensureAuthenticated, function(req, res) {
     User.find({userType: "doctor"}, function (err, doctors) {
-        res.render("viewDoctors", {doctors: doctors});
+        Availability.find({}, function(err, availabilities) {
+            res.render("viewDoctors", {doctors: doctors, availabilities: availabilities});
+        });
     });
 });
 
