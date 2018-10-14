@@ -2,8 +2,50 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
 var Availability = require("../models/availability");
+const nodemailer = require("nodemailer");
+let transporter = null;
+var bookingConfirmation = require("./templates/bookingConfirmation");
 
+nodemailer.createTestAccount((err, account) => {
+    transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // true for 465, false for other port
+      auth: {
+        user: "mastodonuts0@gmail.com", // generated ethereal user
+        pass: "hrhk1234" // generated ethereal password
+      }
+    });
+  });
 
+  function postConfirmationEmail(user, availability) {
+    let mailOptions = {
+        from: '"UTS University" <mastodonuts0@gmail.com>', // sender address
+        to: "deityhippo@gmail.com", // list of receivers
+        subject: "UTS Medical Appointment Confirmation", // Subject le
+        text: "Confirmation", // plain text body
+        // MAIL TEMPLATE
+    
+        html: bookingConfirmation(
+          user.name,
+          availability
+        ) // html body
+      };
+      // send mail with defined transport object
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log("Failed to send confirmation email", error);
+        }
+        console.log("Message sent: %s", info.messageId);
+        console.log(
+          "Preview URL: %s",
+          nodemailer.getTestMessageUrl(info)
+        );
+      });
+  }
+
+ 
+  
 router.get("/", ensureAuthenticated, function(req, res) {
     var user = req.user
     viewAllDoctors(res, req, user);
@@ -57,6 +99,12 @@ function updateBooking(res, id, req) {
             Availability.updateOne({_id: id}, query, function(err, availability) {
                 if (err) throw err;
                 viewAllDoctors(res, req, user);
+                Availability.findOne({_id: id}, function (error, availabilities) {
+                    console.log(availabilities.doctor);
+                    console.log(availabilities.appointment.date, availabilities.appointment.time);
+                    postConfirmationEmail(user, availabilities);
+                });
+                
             });
              } else {
                 Availability.find({}, function (error, availabilities) {
