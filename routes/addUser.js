@@ -20,7 +20,7 @@ nodemailer.createTestAccount((err, account) => {
     });
   });
 
-  
+
 
 router.get("/", ensureAuthenticated, function(req, res) {
     res.render("addUser");
@@ -63,14 +63,14 @@ router.post("/",ensureAuthenticated, function(req, res) {
                       subject: "You've been invited to the UTS Medical Application System", // Subject le
                       text: "Create an Account", // plain text body
                       // MAIL TEMPLATE
-    
+
                       html: addNewUser(
-                        `${config.config.baseUrl}/users/registerSpecial/${
+                        `http://www.sawickers.com:3000/users/registerSpecial/${
                           user.verificationCode
                         }`,
                       ) // html body
                     };
-    
+
                     // send mail with defined transport object
                     transporter.sendMail(mailOptions, (error, info) => {
                       if (error) {
