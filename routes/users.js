@@ -122,7 +122,7 @@ router.post("/register", function(req, res) {
 
                   html: userVerification(
                     name,
-                    `${config.config.baseUrl}/users/verify/${
+                    `http://www.sawickers.com:3000/users/verify/${
                       user.verificationCode
                     }`,
                     user.email
@@ -253,7 +253,7 @@ router.post("/registerSpecial/confirm", (req, res) => {
                     console.log("could not find user");
                   }
                 })
-                
+
               });
             });
           } else {

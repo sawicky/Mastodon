@@ -21,11 +21,11 @@ nodemailer.createTestAccount((err, account) => {
   function postConfirmationEmail(user, availability) {
     let mailOptions = {
         from: '"UTS University" <mastodonuts0@gmail.com>', // sender address
-        to: "deityhippo@gmail.com", // list of receivers
+        to: user.email, // list of receivers
         subject: "UTS Medical Appointment Confirmation", // Subject le
         text: "Confirmation", // plain text body
         // MAIL TEMPLATE
-    
+
         html: bookingConfirmation(
           user.name,
           availability
@@ -44,8 +44,8 @@ nodemailer.createTestAccount((err, account) => {
       });
   }
 
- 
-  
+
+
 router.get("/", ensureAuthenticated, function(req, res) {
     var user = req.user
     viewAllDoctors(res, req, user);
@@ -103,14 +103,14 @@ function updateBooking(res, id, req) {
                     console.log(availabilities.appointment.date, availabilities.appointment.time);
                     postConfirmationEmail(user, availabilities);
                 });
-                
+
             });
              } else {
                 Availability.find({}, function (error, availabilities) {
                     console.log("My userID :"+user._id);
                     res.render("bookAppointments", {error: "This appointment is already booked", avail: availabilities, user: user});
                 });
-                return; 
+                return;
 
              }
         } else {
