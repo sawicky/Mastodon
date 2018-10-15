@@ -34,7 +34,7 @@ nodemailer.createTestAccount((err, account) => {
       // send mail with defined transport object
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          return console.log("Failed to send confirmation email", error);
+          return console.log("Failed to send confirmation email, please try again", error);
         }
         console.log("Message sent: %s", info.messageId);
         console.log(
