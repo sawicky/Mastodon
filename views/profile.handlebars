@@ -7,6 +7,9 @@
                 <div class="card-body">
                     <h2 class="card-title">{{user.name}}</h2>
                     <p class="card-text">{{user.bio}}</p>
+                    {{#ifEquals doctorView "true"}}
+                     <p class="card-text">{{form.description}}</p>
+                    {{/ifEquals}}
                     <span class="card-text specialty">{{user.specialty}}</span>
                 </div>
             </div>

@@ -20,7 +20,7 @@ router.get('/', ensureAuthenticated, function(req, res){
 		break;
 
 		case "doctor":
-        Availability.find({doctor: user.username}, function (err, availability) {
+        Availability.find({doctorId: user._id}, function (err, availability) {
             res.render("indexDoctor", {
                 availability: availability,
             });

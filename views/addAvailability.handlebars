@@ -1,4 +1,7 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
 
 <main class="container-fluid">
 
@@ -10,6 +13,7 @@
 
                 <form method="post" action="/addAvailability">
                     <div id="addAvailability" class="form-group custom-form">
+
                         <!-- Date and time -->
                         <label class="datetime"> Pick a date </label>
                         <input onchange="DateSelected()" id="date" type="date" name="date" required/>
@@ -33,6 +37,11 @@
                     </div>
                 </form>
             </div>
+
+
+
+
+
         </section>
     </div>
 </main>
@@ -52,28 +61,21 @@
     function DateSelected(){
         var date = document.getElementById("date").value;
         var time = document.getElementById("time").value;
-
         var errormsg = document.getElementById("error-msg");
         var isScheduled = false;
-
         // Check if the date and time input has already been scheduled.
         {{#each availability}}
             if("{{this.appointment.date}}" == date && "{{this.appointment.time}}" == time)
                 isScheduled = true;
         {{/each}}
-
         // If they are scheduled, display an error message
         if(isScheduled)
             errormsg.style.display = "block";
         else
             errormsg.style.display = "none";
-
         if(date != null && time.length >= 6 && !isScheduled)
             button.style.display = "inline-block";
         else
             button.style.display = "none";
     }
 </script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -30,7 +30,7 @@
 
                         {{#each availability}}
                             <tr>
-                                <td>{{this.appointment.student}}</td>
+                                <td><a href="/profile?s={{this.appointment.studentId}}&d={{this.doctorId}}">{{this.appointment.student}}</a></td>
                                 <td>{{this.appointment.date}}</td>
                                 <td>{{this.appointment.time}}</td>
                                 <td>30 mins</td>
