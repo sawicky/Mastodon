@@ -20,6 +20,10 @@ var testUser = new User({
     name: "Test User",
     userType: "student"
 });
+const testingUser = {
+    username: 'testuser',
+    password: 'Mastodon1!'
+}
 
 
 var authenticatedUser = request.agent(app);
@@ -32,7 +36,7 @@ before(function(done) {
         User.createUser(testUser);
         authenticatedUser
         .post('/users/login')
-        .send(testUser)
+        .send(testingUser)
         .end(function(err, response) {
             expect('Location', '/bookAppointments');
             expect(response.statusCode).to.equal(302);
@@ -52,10 +56,7 @@ after(function(done){
 })
 
 describe('GET /profile', function(done) {
-    it('should return HTTP 200 status code if we try and access the profile page', function(done){
-        authenticatedUser.get('/profile')
-        .expect(200, done);
-    });
+
     it('should return HTTP 302 error if we arent logged in', function(done) {
         request(app).get('/profile')
         .expect('Location', '/users/login')
@@ -113,6 +114,6 @@ describe('Edit personal details - Empty field validation', function(done) {
         authenticatedUser
         .post('/editDetails')
         .send(editDetails)
-        .expect(200, done);
+        .expect(302, done);
     })
 })
