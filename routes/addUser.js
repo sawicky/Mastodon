@@ -16,6 +16,8 @@ nodemailer.createTestAccount((err, account) => {
       auth: {
         user: "mastodonuts0@gmail.com", // generated ethereal user
         pass: "hrhk1234" // generated ethereal password
+
+        
       }
     });
   });

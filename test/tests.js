@@ -25,6 +25,7 @@ const testingUser = {
     password: 'Mastodon1!'
 }
 
+//comment
 
 var authenticatedUser = request.agent(app);
 mongoose.connect('mongodb://localhost/testmastodon');
