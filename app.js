@@ -136,6 +136,7 @@ app.use("/adminManager", adminManager);
 app.use('/addUser', addUser);
 app.use("/createMedicalForm", createMedicalForm);
 app.use("/viewAvailability", viewAvailability);
+process.title = "Mastodon";
 //add path to a route here
 
 // Set Port

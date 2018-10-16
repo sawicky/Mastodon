@@ -7,7 +7,7 @@
     "start": "node app.js",
     "test": "node_modules/mocha/bin/mocha ./test",
     "test-mocha": "node_modules/mocha/bin/mocha ./tests",
-    "hello": "echo hello back"
+    "stop": "pkill --signal SIGINT Mastodon"
   },
   "author": "",
   "license": "ISC",

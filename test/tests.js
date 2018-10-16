@@ -55,6 +55,7 @@ after(function(done){
     })
 })
 
+
 describe('GET /profile', function(done) {
 
     it('should return HTTP 302 error if we arent logged in', function(done) {
