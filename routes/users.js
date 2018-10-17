@@ -301,9 +301,9 @@ router.get("/verify/:code", (req, res) => {
   //   )
   //   .then(result => {
 });
-router.post("/login",
+router.post("/mastodon/login",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/mastodon/",
     failureRedirect: "/mastodon/users/login",
     failureFlash: true
   }),
