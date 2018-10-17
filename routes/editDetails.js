@@ -70,7 +70,7 @@ router.post("/", ensureAuthenticated, function(req, res) {
 
               if (req.user.email !== user.email || req.user.username !== user.username) {
                 req.logOut();
-                res.redirect("/users/login");
+                res.redirect("/mastodon/users/login");
                 return;
               }
               req.flash("success_msg", "You are updated");

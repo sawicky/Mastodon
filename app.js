@@ -122,7 +122,7 @@ app.use(function(req, res, next) {
 //when a url path is requested, call the router for that page
 app.use("/", routes);
 app.use("/dashboard", routes);
-app.use("/users", users);
+app.use("/mastodon/users", users);
 app.use("/editDetails", editDetails);
 app.use("/changePassword", changePassword);
 app.use("/viewDoctors", viewDoctors);
