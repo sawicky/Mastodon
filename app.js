@@ -120,22 +120,22 @@ app.use(function(req, res, next) {
 });
 
 //when a url path is requested, call the router for that page
-app.use("/", routes);
-app.use("/dashboard", routes);
-app.use("/users", users);
-app.use("/editDetails", editDetails);
-app.use("/changePassword", changePassword);
-app.use("/viewDoctors", viewDoctors);
-app.use("/contactus", contactus);
-app.use("/profile", profile);
-app.use("/uploadPrescriptions", uploadPrescriptions);
-app.use("/viewPrescriptions", viewPrescriptions);
-app.use("/addAvailability", addAvailability);
-app.use("/bookAppointments", bookAppointments);
-app.use("/adminManager", adminManager);
-app.use('/addUser', addUser);
-app.use("/createMedicalForm", createMedicalForm);
-app.use("/viewAvailability", viewAvailability);
+app.use("/mastodon/", routes);
+app.use("/mastodon/dashboard", routes);
+app.use("/mastodon/users", users);
+app.use("/mastodon/editDetails", editDetails);
+app.use("/mastodon/changePassword", changePassword);
+app.use("/mastodon/viewDoctors", viewDoctors);
+app.use("/mastodon/contactus", contactus);
+app.use("/mastodon/profile", profile);
+app.use("/mastodon/uploadPrescriptions", uploadPrescriptions);
+app.use("/mastodon/viewPrescriptions", viewPrescriptions);
+app.use("/mastodon/addAvailability", addAvailability);
+app.use("/mastodon/bookAppointments", bookAppointments);
+app.use("/mastodon/adminManager", adminManager);
+app.use('/mastodon/addUser', addUser);
+app.use("/mastodon/createMedicalForm", createMedicalForm);
+app.use("/mastodon/viewAvailability", viewAvailability);
 process.title = "Mastodon";
 //add path to a route here
 
