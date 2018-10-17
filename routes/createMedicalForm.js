@@ -19,7 +19,7 @@ function ensureAuthenticated(req, res, next) {
         return next();
     } else {
         req.flash("error_msg", "You are not logged in");
-        res.redirect("/users/login");
+        res.redirect("/mastodon/users/login");
     }
 }
 
@@ -95,13 +95,13 @@ function validation(req,res) {
             if (err) {throw err;}
             else {
                 req.flash("success_msg", "Medical form was added");
-                res.redirect("createMedicalForm");
+                res.redirect("mastodon/createMedicalForm");
             }
         })
 
         } else {
             res.status(302);
-            res.render("createMedicalForm", {loggedinUser:req.user, error:"You already have filled out a form"});
+            res.render("mastodon/createMedicalForm", {loggedinUser:req.user, error:"You already have filled out a form"});
         }
         });
     }

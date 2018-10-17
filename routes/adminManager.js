@@ -99,12 +99,12 @@ function deleteAppointment(id, req, res){
         Availability.deleteAvailability(id, function (err, cb) {
             if(err){
                 req.flash("error-msg", "Couldn't delete appointment");
-                res.redirect("appointments");
+                res.redirect("mastodon/appointments");
                 throw err;
             }
 
             req.flash("success_msg", "Appointment has been deleted successfully");
-            res.redirect("appointments");
+            res.redirect("mastodon/appointments");
         });
 
 }

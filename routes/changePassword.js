@@ -53,7 +53,7 @@ function comparePassword(req, res, password, newPassword){
                 if (err) throw err;
                 req.logout();
                 req.flash("success_msg", "Password changed successfully");
-                res.redirect("/users/login");
+                res.redirect("/mastodon/users/login");
             });
         } else {
             res.render("changePassword", {
@@ -68,7 +68,7 @@ function ensureAuthenticated(req, res, next) {
     return next();
   } else {
     req.flash("error_msg", "You are not logged in");
-    res.redirect("/users/login");
+    res.redirect("/mastodon/users/login");
   }
 }
 module.exports = router;

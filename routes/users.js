@@ -122,7 +122,7 @@ router.post("/register", function(req, res) {
 
                   html: userVerification(
                     name,
-                    `http://www.sawickers.com:3000/users/verify/${
+                    `https://www.sawickers.com/users/verify/${
                       user.verificationCode
                     }`,
                     user.email
@@ -192,7 +192,7 @@ passport.deserializeUser(function(id, done) {
 });
 router.get("/registerSpecial/:code", (req, res) => {
   if (req.user) {
-    return res.redirect("/");
+    return res.redirect("/mastodon/");
   }
   var verification = req.params.code;
   User.findOne({verificationCode : verification}, function (err, user) {
@@ -248,7 +248,7 @@ router.post("/registerSpecial/confirm", (req, res) => {
                 User.updateOne({_id : id}, query, function(err, user) {
                   if (user) {
                     console.log("success");
-                    res.redirect("/users/login");
+                    res.redirect("/mastodon/users/login");
                   } else {
                     console.log("could not find user");
                   }
@@ -284,7 +284,7 @@ router.get("/verify/:code", (req, res) => {
         return res.status(200).send("Link is expired");
       }
 
-      res.redirect("/users/login");
+      res.redirect("/mastodon/users/login");
     })
     .catch(err => {
       reject(err);
@@ -304,12 +304,12 @@ router.get("/verify/:code", (req, res) => {
 router.post("/login",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/users/login",
+    failureRedirect: "/mastodon/users/login",
     failureFlash: true
   }),
   function(req, res) {
     res.status(200)
-    res.redirect(200, "/dashboard");
+    res.redirect(200, "/mastodon/dashboard");
   }
 );
 
@@ -318,7 +318,7 @@ router.get("/logout", function(req, res) {
 
   req.flash("success_msg", "You are logged out");
   res.status(200);
-  res.redirect("/users/login");
+  res.redirect("/mastodon/users/login");
 });
 
 module.exports = router;

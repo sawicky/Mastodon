@@ -58,7 +58,7 @@ function addPrescriptionToDB(req, res, newPrescription){
             req.flash("success_msg", "Upload Success!");
             console.log(prescription);
         }
-        res.redirect("/viewPrescriptions");
+        res.redirect("/mastodon/viewPrescriptions");
     });
 }
 
@@ -69,7 +69,7 @@ function ensureAuthenticated(req, res, next) {
         return next();
     } else {
         req.flash("error_msg", "You are not logged in");
-        res.redirect("/users/login");
+        res.redirect("/mastodon/users/login");
     }
 }
 

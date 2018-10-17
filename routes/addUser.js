@@ -67,7 +67,7 @@ router.post("/",ensureAuthenticated, function(req, res) {
                       // MAIL TEMPLATE
 
                       html: addNewUser(
-                        `http://www.sawickers.com:3000/users/registerSpecial/${
+                        `https://www.sawickers.com/users/registerSpecial/${
                           user.verificationCode
                         }`,
                       ) // html body
@@ -83,7 +83,7 @@ router.post("/",ensureAuthenticated, function(req, res) {
                       "success_msg",
                       "Invitation email sent to user"
                     );
-                    res.redirect("/");
+                    res.redirect("/mastodon/");
                   });
               }
           })
@@ -97,7 +97,7 @@ function ensureAuthenticated(req, res, next) {
         return next();
     } else {
         req.flash("error_msg", "Please login as an admin");
-        res.redirect("/");
+        res.redirect("/mastodon/");
     }
 }
 
