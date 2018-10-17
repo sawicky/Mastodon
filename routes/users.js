@@ -144,7 +144,7 @@ router.post("/register", function(req, res) {
                   "success_msg",
                   "You are registered and verification Link is send to registered e-mail"
                 );
-                res.redirect("/users/login");
+                res.redirect("/mastodon/users/login");
               });
             }
           }
