@@ -18,21 +18,21 @@ var db = mongoose.connection;
 
 
 // Store the routes for each page
-var routes = require("./mastodon/routes/index");
-var users = require("./mastodon/routes/users");
-var editDetails = require("./mastodon/routes/editDetails");
-var changePassword = require("./mastodon/routes/changePassword");
-var bookAppointments = require("./mastodon/routes/bookAppointments");
-var viewDoctors = require("./mastodon/routes/viewDoctors");
-var contactus = require("./mastodon/routes/contactus");
-var profile = require("./mastodon/routes/profile");
-var uploadPrescriptions = require("./mastodon/routes/uploadPrescriptions");
-var viewPrescriptions = require("./mastodon/routes/viewPrescriptions");
-var addAvailability = require("./mastodon/routes/addAvailability");
-var adminManager = require("./mastodon/routes/adminManager");
-var addUser = require("./mastodon/routes/addUser");
-var createMedicalForm = require("./mastodon/routes/createMedicalForm");
-var viewAvailability = require("./mastodon/routes/viewAvailability");
+var routes = require("./routes/index");
+var users = require("./routes/users");
+var editDetails = require("./routes/editDetails");
+var changePassword = require("./routes/changePassword");
+var bookAppointments = require("./routes/bookAppointments");
+var viewDoctors = require("./routes/viewDoctors");
+var contactus = require("./routes/contactus");
+var profile = require(".routes/profile");
+var uploadPrescriptions = require("./routes/uploadPrescriptions");
+var viewPrescriptions = require("./routes/viewPrescriptions");
+var addAvailability = require("./routes/addAvailability");
+var adminManager = require("./routes/adminManager");
+var addUser = require("./routes/addUser");
+var createMedicalForm = require("./routes/createMedicalForm");
+var viewAvailability = require("./routes/viewAvailability");
 
 // store routes here
 
