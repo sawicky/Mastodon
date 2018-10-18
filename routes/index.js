@@ -10,7 +10,7 @@ router.get('/', ensureAuthenticated, function(req, res){
 	switch (user.userType) {
 
 		case "student":
-		res.redirect('bookAppointments');
+		res.redirect('mastodon/bookAppointments');
 		console.log("User is a student, showing student indextest");
 		break;
 

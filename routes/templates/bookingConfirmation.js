@@ -35,7 +35,7 @@ function bookingConfirmation(firstName, availability) {
       h3 {
         font-weight: 800 !important; margin: 20px 0 5px !important;
       }
-      h4 {
+      h4 {padding
         font-weight: 800 !important; margin: 20px 0 5px !important;
       }
       h1 {

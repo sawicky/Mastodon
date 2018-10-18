@@ -12,6 +12,7 @@ var mongo = require("mongodb");
 var mongoose = require("mongoose");
 const MongoClient = require('mongodb').MongoClient;
 
+
 //connecting to mastodon db, make sure you have created this db locally
 mongoose.connect("mongodb://localhost/mastodon");
 var db = mongoose.connection;
@@ -57,7 +58,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Set Static Folder
-app.use(express.static(path.join(__dirname, "public")));
+app.use('/mastodon', express.static(path.join(__dirname, "public")));
 
 // Express Session
 app.use(
@@ -120,7 +121,7 @@ app.use(function(req, res, next) {
 });
 
 //when a url path is requested, call the router for that page
-app.use("/", routes);
+app.use("/mastodon/", routes);
 app.use("/dashboard", routes);
 app.use("/mastodon/users", users);
 app.use("/editDetails", editDetails);
